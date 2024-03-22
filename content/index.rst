@@ -11,13 +11,6 @@ Intro
 
 
 
-.. csv-table::
-   :widths: auto
-   :delim: ;
-
-   20 min ; :doc:`filename`
-
-
 .. toctree::
    :maxdepth: 1
    :caption: The lesson
