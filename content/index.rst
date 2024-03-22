@@ -1,5 +1,5 @@
-LESSON NAME
-===========
+Snakemake Hackathon
+===================
 
 Intro
 
@@ -13,8 +13,11 @@ Intro
 
 .. toctree::
    :maxdepth: 1
-   :caption: The lesson
+   :caption: Theory
 
+   HPC_refresh.md
+   Snakemake_intro.md
+   Snakemake_HPC.md
 
 .. toctree::
    :maxdepth: 1
