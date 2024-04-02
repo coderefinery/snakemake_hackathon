@@ -11,3 +11,9 @@ Recap of the most important concepts of HPC that need to be understood to run Sn
 ### Premade
 
 ### Own modules
+
+## Many small jobs
+
+## Heavy I/O
+
+## ..-
