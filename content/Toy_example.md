@@ -8,6 +8,8 @@ Snakemake workflow is one of the popular scientific workflows in the bioinformat
 The workflow manager enables scalable and reproducible scientific pipelines by chaining a series of rules in a 
 fully-specified software environment. 
 
+This example is adapted from ["Using CSC Computing Environment Efficiently"](https://csc-training.github.io/csc-env-eff/) course.
+
 ## Use Containers as Runtime Environment 
 
 One can use Singularity/Apptainer container as an alternative to native installations 
