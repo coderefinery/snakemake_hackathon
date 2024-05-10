@@ -1,6 +1,6 @@
 # Snakemake on the supercomputer
 
-Considerations and preparations to move a workflow to cluster
+Running Snakemake on CSC's Puhti or LUMI: [Slides](https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers).
 
 ## Prerequisite: Portable workflow
 
