@@ -1,5 +1,9 @@
 # Snakemake introduction
 
+```{objectives}
+- TBD
+```
+
 ## Why workflow tools?
 
 Example usecase from GUI -> multiple scripts run manually -> bash script to run all 
@@ -27,3 +31,8 @@ Why snakemake over other tools?
 ### Parallelism
 
 ### Portability
+
+
+```{keypoints}
+- TBD
+```
