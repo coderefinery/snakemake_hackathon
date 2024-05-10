@@ -25,6 +25,7 @@ Materials for Snakemake hackathon organized on 22.05.24.
 
    Snakemake_intro.md
    Snakemake_HPC.md
+   Toy_example.md
 
 .. toctree::
    :maxdepth: 1
