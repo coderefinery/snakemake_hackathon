@@ -1,5 +1,9 @@
 # Snakemake on the supercomputer
 
+```{questions}
+- How hard is it to set up a test suite for a first unit test?
+```
+
 Running Snakemake on CSC's Puhti or LUMI: [Slides](https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers).
 
 ## Prerequisite: Portable workflow
@@ -54,3 +58,6 @@ Another way would be to use slurm executor plugin or [HyperQueue](https://docs.c
 - Separate serial from parallel jobs for efficient use of resources
 
 
+```{keypoints}
+- TBD
+```
