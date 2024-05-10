@@ -1,8 +1,15 @@
 Snakemake Hackathon
 ====================
 
-Intro
+.. info::
+   These materials are work in progress!
 
+
+Materials for Snakemake hackathon organized on 22.05.24. 
+
+.. image:: img/csc_geoportti_coderefinery_enccs_naiss_logos_horizontal.png
+  :width: 400
+  :alt: Logos of all organizers and partners: Geoportti, CSC, CodeRefinery, ENCCS, NAISS
 
 
 .. prereq::
