@@ -1,7 +1,7 @@
 # Snakemake on the supercomputer
 
-```{questions}
-- How hard is it to set up a test suite for a first unit test?
+```{objectives}
+- TBD
 ```
 
 Running Snakemake on CSC's Puhti or LUMI: [Slides](https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers).
