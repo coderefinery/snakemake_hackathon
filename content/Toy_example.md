@@ -113,14 +113,15 @@ by submitting more jobs from *snakemake* command as below:
 
 ```bash
 snakemake -s Snakefile --jobs 8 --use-singularity --executor cluster-generic --cluster-generic-submit-cmd "hq submit --cpus 5"
-``` 
+```
+
 You can correct above modification in the batch script (and use your own project number in sbatch directives) 
 before submitting the Snakemake workflow job to the HPC cluster as below:
 
 ```
 sbatch snakemake_hq_puhti.sh
-
 ```
+
 One can also use more than one node to achieve even more high-throughput as HyperQueue can make use of multi-node resource allocations.
 
 Please note that just by increasing the number jobs will not alone automatically run all those jobs. 
@@ -136,7 +137,7 @@ task-specific folders are being created. However, there are formal ways to check
 
 `````{tabs}
   ````{group-tab} Full job monitoring
-    ```
+    ```bash
     squeue -j <slurmjobid>
     # or
     squeue --me
@@ -145,7 +146,7 @@ task-specific folders are being created. However, there are formal ways to check
     ```
   ```
   ````{group-tab} Sub task monitoring
-    ```
+    ```bash
     module load hyperqueue
     export HQ_SERVER_DIR=$PWD/hq-server-<slurmjobid>
     hq worker list   
@@ -154,8 +155,9 @@ task-specific folders are being created. However, there are formal ways to check
     hq job progress <hqjobid>
     hq task list <hqjobid>
     hq task info <hqjobid> <hqtaskid>
-    
     ```
+  ````
+````` 
 
 ### How do you clean different task-specific folders automatically?
 
