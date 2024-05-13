@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = "Snakemake Hackathon"
-copyright = "2024
+copyright = "2024"
 author = "The contributors"
 github_user = "coderefinery"
 github_repo_name = ""  # auto-detected from dirname if blank
