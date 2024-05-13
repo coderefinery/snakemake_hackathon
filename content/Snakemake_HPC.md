@@ -38,6 +38,13 @@ snakemake --executor cluster-generic --cluster-generic-submit-cmd "hq submit ...
 
 ## Snakemake workflow execution on HPC cluster
 
+Create and enter a suitable scratch directory on Puhti (replace <project> with your CSC project, e.g. project_2001234):
+
+```bash
+mkdir -p /scratch/<project>/$USER/snakemake-ht
+cd /scratch/<project>/$USER/snakemake-ht
+```
+
 Download tutorial materials (scripts and data), which have been adapted from the [official Snakemake documentation](https://snakemake.readthedocs.io/en/v6.6.1/executor_tutorial/google_lifesciences.html), from CSC Allas object storage as below:
 
 ```bash
