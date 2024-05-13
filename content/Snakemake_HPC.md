@@ -14,16 +14,28 @@
 3. Container based installation
 
 Always check first if your cluster has the tool available as module, as then you do not have to worry about installation at all.
-If you need additional packages, you can usually add own packages by `pip install`. If that for some reason does not work, you can create your own installation with Conda or Pip, or by making use of containers. **Check your clusters documentation for information on how to do these.**
+If you need additional packages, you can usually add own packages by `pip install` for your own user or project. If that for some reason does not work, you can create your own installation with Conda or Pip, or by making use of containers. **Check your clusters documentation for information on how to do these.**
 
 ### Command line arguments for own scripts
 
 Make it possible to provide arguments like paths and other "maybe changing" parameters of your scripts as command line arguments. 
 
-in R:
-e.g. args = commandArgs(trailingOnly=TRUE)
-in Python:
-e.g. sys.argv, click, argparse
+
+`````{tabs}
+  ````{group-tab} Python
+    ```Python
+    e.g. sys.argv, click, argparse
+    ```
+  ```` 
+  ````{group-tab} R
+    ```R
+    e.g. args = commandArgs(trailingOnly=TRUE)
+    ```
+  ````
+  ````{group-tab} Bash 
+    Use `$1` to access the first command line argument to a bash script.
+  ````
+`````
 
 ### Config files
 
