@@ -52,10 +52,15 @@ rule copy_file:
 ```
 
 - Expand
+- localrules?
+
+
 
 ### Execution
 
 Local runner/executor: `snakemake --cores 1`
+
+- command line arguments vs config file
 
 ### Dependencies of steps
 
@@ -63,6 +68,12 @@ DAG: Directed acyclic graphs are built when Snakemake is run
 
 - implicit parallelization (uses number of cores given to run tasks in parallel)
 - Resolves step dependencies before execution
+
+### Parallelization
+
+`threads`
+`--cores`
+
 
 ### Wildcards
 
@@ -104,6 +115,8 @@ Monitoring availabe via panoptes (external tool)
 ## Interoperability
 
 Workflows can be exported to eg Common Workflow Language (CWL) to be executed with other tools too (eg Cromwell, Toil ?) 
+
+Notes from here: https://snakemake.readthedocs.io/en/stable/executing/interoperability.html#cwl-export
 
 ## Unit tests
 
