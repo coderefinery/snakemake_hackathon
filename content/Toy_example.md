@@ -1,12 +1,8 @@
-# Running Snakemake Workflow at Scale 
+# Toy example: Snakemake at Scale 
 
 ```{objectives}
 - TBD
 ```
-
-Snakemake workflow is one of the popular scientific workflows in the bioinformatics community. 
-The workflow manager enables scalable and reproducible scientific pipelines by chaining a series of rules in a 
-fully-specified software environment. 
 
 This example is adapted from ["Using CSC Computing Environment Efficiently"](https://csc-training.github.io/csc-env-eff/) course.
 
