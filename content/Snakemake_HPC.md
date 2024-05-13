@@ -16,9 +16,21 @@
 Always check first if your cluster has the tool available as module, as then you do not have to worry about installation at all.
 If you need additional packages, you can usually add own packages by `pip install`. If that for some reason does not work, you can create your own installation with Conda or Pip, or by making use of containers. **Check your clusters documentation for information on how to do these.**
 
-### Paths
+### Command line arguments for own scripts
 
-Check your file and script paths!
+Make it possible to provide arguments like paths and other "maybe changing" parameters of your scripts as command line arguments. 
+
+in R:
+e.g. args = commandArgs(trailingOnly=TRUE)
+in Python:
+e.g. sys.argv, click, argparse
+
+### Config files
+
+(from Snakemake docs)
+Configuration of a workflow should be handled via config files and, if needed, tabular configuration like sample sheets (either via Pandas or PEPs). Use such configuration for metadata and experiment information, not for runtime specific configuration like threads, resources and output folders. For those, just rely on Snakemake’s CLI arguments like --set-threads, --set-resources, --set-default-resources, and --directory. This makes workflows more readable, scalable, and portable.
+
+
 
 ## Ways of running Snakemake on clusters
 
