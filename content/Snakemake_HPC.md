@@ -1,18 +1,34 @@
 # Snakemake on the supercomputer
 
 ```{objectives}
-- TBD
+- Understand the different ways Snakemake can be run on clusters
+- ...
 ```
 
-Running Snakemake on CSC's Puhti or LUMI: [Slides](https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers).
+## Prerequisites
 
-## Prerequisite: Portable workflow
+### Snakemake installation
 
-Check your filepaths!
+1. Preinstalled and made available via module: `module load snakemake/version`
+2. Conda/Pip based installation
+3. Container based installation
 
-## Working with modules
+Always check first if your cluster has the tool available as module, as then you do not have to worry about installation at all.
+If you need additional packages, you can usually add own packages by `pip install`. If that for some reason does not work, you can create your own installation with Conda or Pip, or by making use of containers. **Check your clusters documentation for information on how to do these.**
 
-`module load snakemake/version`
+### Paths
+
+Check your file and script paths!
+
+## Ways of running Snakemake on clusters
+
+### Interactive
+
+### One job
+
+### Slurm integration
+
+### Hyperqueue
 
 ## Snakemake cluster execution
 
@@ -56,6 +72,18 @@ Another way would be to use slurm executor plugin or [HyperQueue](https://docs.c
 - Avoid creating a lot of files, especially in the same folder
 - Remove temporary files after the job is finnished
 - Separate serial from parallel jobs for efficient use of resources
+
+
+##  Cluster specific information
+
+`````{tabs}
+  ````{group-tab} CSC Puhti or LUMI
+Running Snakemake on CSC's Puhti or LUMI: [Slides](https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers).
+  ````
+  ````{group-tab} UPPMAX
+TBD
+  ````
+`````
 
 
 ```{keypoints}
