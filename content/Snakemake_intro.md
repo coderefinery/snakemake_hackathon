@@ -124,7 +124,11 @@ Generate automatically with Snakemake.
 
 ## Workflow reproducibility
 
+## Visualization
 
+Example how to viz the workflow: https://coderefinery.github.io/reproducible-research/workflow-management/#visualizing-the-workflo## Visualization
+
+Example how to viz the workflow: https://coderefinery.github.io/reproducible-research/workflow-management/#visualizing-the-workfloww
 
 ```{keypoints}
 - TBD
