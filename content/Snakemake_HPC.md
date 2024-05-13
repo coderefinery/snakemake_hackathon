@@ -84,7 +84,7 @@ Another way would be to use slurm executor plugin or [HyperQueue](https://docs.c
 - Avoid creating a lot of files, especially in the same folder
 - Remove temporary files after the job is finnished
 - Separate serial from parallel jobs for efficient use of resources
-
+- Consider job grouping: https://snakemake.readthedocs.io/en/stable/executing/grouping.html
 
 ##  Cluster specific information
 
