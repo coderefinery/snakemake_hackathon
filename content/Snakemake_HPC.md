@@ -2,7 +2,8 @@
 
 ```{objectives}
 - Understand the different ways Snakemake can be run on clusters
-- ...
+- Evaluate which way suits your needs 
+- Make own workflow ready for HPC
 ```
 
 ## Prerequisites
