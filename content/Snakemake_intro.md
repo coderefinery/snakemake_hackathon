@@ -1,7 +1,13 @@
 # Snakemake introduction
 
 ```{objectives}
-- TBD
+
+- Understand the components and features of a Snakefile
+- Understand portability and reproducibility in the context of Snakemake
+- Write a snakefile
+- Run Snakemake from the shell
+
+
 ```
 
 ## What is a workflow?
