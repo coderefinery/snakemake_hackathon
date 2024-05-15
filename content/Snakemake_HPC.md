@@ -38,7 +38,7 @@ Make it possible to provide arguments like paths and other "maybe changing" para
   ````
 `````
 
-### Config files
+### Config/Profile files
 
 (from Snakemake docs)
 Configuration of a workflow should be handled via config files and, if needed, tabular configuration like sample sheets (either via Pandas or PEPs). Use such configuration for metadata and experiment information, not for runtime specific configuration like threads, resources and output folders. For those, just rely on Snakemake’s CLI arguments like --set-threads, --set-resources, --set-default-resources, and --directory. This makes workflows more readable, scalable, and portable.
