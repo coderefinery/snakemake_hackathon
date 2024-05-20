@@ -108,7 +108,20 @@ rule sorter:
         "sort {input[0]} {input[1]} > {output}"
 ```
 
-In the example above (and the one before) we used hard-coded filenames to tell the input or output values. To make the workflows more generalized, we can use wildcards. Wildcards are variables that are replacing the actual filenames or any other value, like for example a path. Snakemake resolves them automatically based on either the target file or other input/outputs in a Snakefile. Let's add wildcards to the copy example, so it will work for any text file:
+We can also use named inputs and outputs, and refer to them using their names:
+```bash
+rule sorter:
+    input:
+        a="hello.txt", 
+        b="hello2.txt"
+    output:
+        "sorted_greetings.txt",
+    shell:
+        "sort {input.a} {input.b} > {output}"
+```
+
+### Wildcards
+In the examples above we used hard-coded filenames to tell the input or output values. To make the workflows more generalized, we can use wildcards. Wildcards are variables that are replacing the actual filenames or any other value, like for example a path. Snakemake resolves them automatically based on either the target file or other input/outputs in a Snakefile. Let's add wildcards to the copy example, so it will work for any text file:
 ```bash
 rule copy:
     input:
@@ -124,19 +137,143 @@ To run it, we have to tell Snakemake the value of the `data` wildcard. We can do
 snakemake --cores 1 hello_copy.txt
 ```
 
-Snakemake parses the `hello_copy.txt` argument and detects that the wildcard is equal to `hello`. Then, Snakemake looks for the `hello.txt` file. 
+Snakemake parses the `hello_copy.txt` argument and detects that the wildcard is equal to `hello`. Then, Snakemake looks for the `hello.txt` file.
+
+### Python code in Snakefile
+
+Another powerful feature is the possibility to add Python code and function inside of Snakefile. We also have access to Python libraries, by using traditional `import` keyword. For example, the following code searches for all text files in the given directory, and appends their content in the `copy.txt` file.
+```Python
+import os
+
+def find_txt_files(path):
+    txt_files = [file for file in os.listdir(path) if file.endswith(".txt")]
+    return txt_files
+
+rule append:
+    input:
+	    find_txt_files(".")  # . means the current working directory
+    output: 
+	    "results/copy.txt"
+    shell:
+	    "cat {input} >> {output}"
+```
+
+How is this different than wildcards? Here, we did not resolve or specified any file. We can simply call `snakemake --cores 1` without any arguments. This workflow searches for the input files by itself, without any guidance.
+
+Another way of using Python is replacing the shell command with Python script:
+```Python
+rule print_content:
+    input:
+	    "hello.txt"
+    run:
+        with open(input[0]) as in_file:
+            for l in in_file:
+                print(l)
+```
+
+This approach is fine for small code snippets. For bigger scripts, it is better to move code to a separate file and call it in the `Snakefile`. Let's create the `read_and_print.py` file:
+```Python
+with open(snakemake.input[0]) as in_file:
+    for l in in_file:
+        print(l)
+```
+and modify the `Snakefile`:
+```bash
+rule print_content:
+    input:
+	    "hello.txt"
+    script:
+        "read_and_print.py"
+```
+In the Python file, we have access to the `snakemake` object, which allows us to get access to input and output files! We do not need to parse any command line arguments. The access is granted because of the `script` keyword, which works like a wrapper around the script. Similar integrations are available for other languages as well: R, Markdown, Julia, Rust, Bash and Jupyter Notebook. See the current list in the [docs](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#external-scripts)
 
 
-- Expand
-- localrules?
+### Dependencies between rules
+So far, we only examined `Snakefile`s with only one rule. Let's have a look at a bigger workflow.
+```bash
+rule concatenate:
+    input:
+        expand("data/file{n}.txt", n=[1, 2, 3])
+    output:
+        "results/concatenated.txt"
+    shell:
+        "cat {input} > {output}"
 
+rule count_words:
+    input:
+        "results/concatenated.txt"
+    output:
+        "results/word_count.txt"
+    shell:
+        "wc -w {input} > {output}"
+    default_target: True
+```
+This workflow concatenates three input files (`data/file1`, `data/file2`, `data/file3`) and then counts how many words there are. The `Snakefile` consists of three rules. The dependencies between rules are defined by the input and output filenames. The rule `concatenate` generates the output file: `results/concatenated.txt`, which then is used as a input to the `count_words` rule. 
 
+Snakemake uses top-down approach to automatically resolve the dependencies between rules. That means, Snakemake will start from the last rule (so-called target rule) and go backwards, searching for the input needed to execute that step. By default, the target rule is the first rule in the Snakefile. In this case, we want to run the `count_words` rule as the target (first we concatenate, then we count the words). We have to somehow tell Snakemake what is the final output of this workflow. To achieve that, a common practice is adding a mock `rule all` at the beginning of the `Snakefile` that encapsulates the final outputs of the workflow:
+```bash
+rule all:
+    input:
+        "results/word_count.txt"
 
-### Execution
+rule concatenate:
+    input:
+        expand("data/file{n}.txt", n=[1, 2, 3])
+    output:
+        "results/concatenated.txt"
+    shell:
+        "cat {input} > {output}"
 
-Local runner/executor: `snakemake --cores 1`
+rule count_words:
+    input:
+        "results/concatenated.txt"
+    output:
+        "results/word_count.txt"
+    shell:
+        "wc -w {input} > {output}"
+```
 
-- command line arguments vs config file
+Snakemake will see that we want the `results/word_count.txt` file, and will search in the `Snakefile` to see what rule produces this exact output. Then, it will repeat this process recursively until all dependencies are resolved. By doing so, so-called directed acyclic graph (DAG) is created. It is a step-by-step execution plan for Snakemake. We can see and analyze this graph by calling Snakemake with `--dag` flag:
+```bash
+snakemake --cores 1 --dag
+```
+The result can be visualized using either the `GraphViz` package, or online on [this site](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://dreampuf.github.io/GraphvizOnline/&ved=2ahUKEwjLk6SBqJyGAxVCLRAIHVNWBZMQFnoECBQQAQ&usg=AOvVaw2Sw6OnaIb_oZkOtu44VcNz).
+```bash
+snakemake --cores 1 --dag | dot -Tpng > dag.png
+```
+
+One improvement to this `Snakefile` would be to directly refer to the outputs of the rules by using the rule's name. This approach is more robust, as we can freely change the output names, without breaking the workflow. Remember that you can only refer to the rules that were defined before, so we cannot modify in that way the `all` rule)! 
+```bash
+rule all:
+    input:
+        "results/word_count.txt"
+
+rule concatenate:
+    input:
+        expand("data/file{n}.txt", n=[1, 2, 3])
+    output:
+        "results/concatenated.txt"
+    shell:
+        "cat {input} > {output}"
+
+rule count_words:
+    input:
+        rules.concatenate.output
+    output:
+        "results/word_count.txt"
+    shell:
+        "wc -w {input} > {output}"
+```
+
+### Force execution
+
+Snakemake is designed to efficiently manage the execution of complex workflows by only computing the parts that are necessary. Specifically, it checks the presence and timestamps of the output files specified in your workflow rules. If an output file already exists and is up to date, Snakemake will skip the computation steps that produce that file, saving time and resources by avoiding redundant computations.
+
+However, there are situations where you might want to recompute the entire workflow, regardless of the existing files. In such cases, you can force Snakemake to recompute all the steps by using the `-F` or `--forceall` flag. This tells Snakemake to ignore the existing output files and re-run all the rules as if the files were missing.
+
+```bash
+snakemake --cores 1 -F
+```
 
 ### Dependencies of steps
 
@@ -151,9 +288,6 @@ DAG: Directed acyclic graphs are built when Snakemake is run
 `--cores`
 
 
-### Wildcards
-
-...
 
 ### Python and Snakemake
 
