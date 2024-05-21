@@ -1,24 +1,10 @@
-# Toy example: Snakemake at Scale 
-
-```{objectives}
-- TBD
-```
+# Hyperqueue example: Snakemake at Scale 
 
 This example is adapted from ["Using CSC Computing Environment Efficiently"](https://csc-training.github.io/csc-env-eff/) course.
 
-## Use Containers as Runtime Environment 
-
-One can use Singularity/Apptainer container as an alternative to native installations 
-for better portability and reproducibility.  If you don't have a ready-made container image for your needs, 
-you can build a Singularity/Apptainer image using **--fakeroot** option.  
-
-For the purpose of this tutorial a pre-built container image which has all the software stack needed is provided 
-to run snakemake workflow at scale.
-
 ## Use HyperQueue Executor to Submit Jobs
 
-If the workflow manager is using `sbatch` for each process execution (i.e., a rule), 
-and you have many short processes, it's advisable to switch to HyperQueue to improve throughput and decrease 
+If you have many short processes, it's advisable to use HyperQueue instead of Snakemake SLURM integration to improve throughput and decrease 
 load on the system batch scheduler.
 
 You can load HyperQueue and Snakemake modules on different clusters as described below:
@@ -36,6 +22,13 @@ You can load HyperQueue and Snakemake modules on different clusters as described
     module load hyperqueue/0.18.0
     module load snakemake/8.4.6
     ```
+  ````
+  ````{group-tab} Other
+    ```bash
+    module load hyperqueue
+    module load snakemake
+    ```
+    If available, otherwise ask your cluster admin to install it for you.
   ````
 `````
 
@@ -55,15 +48,26 @@ One can use HyperQueue executor settings depending on the Snakemake version as b
 
 Download tutorial materials (scripts and data), which have been adapted from the 
 [official Snakemake documentation](https://snakemake.readthedocs.io/en/v6.6.1/executor_tutorial/google_lifesciences.html), 
-from CSC Allas object storage as below:
+from CSC Allas object storage as below (no login required):
 
 ```bash
 wget https://a3s.fi/snakemake_scale/snakemake_scaling.tar.gz
 tar -xavf snakemake_scaling.tar.gz
 ```
 
-The downloaded material includes scripts and data to run snakemake pipeline. 
-You can use `snakemake_hq_puhti.sh` whose content is posted below:
+The downloaded material includes scripts and data to run snakemake pipeline:
+
+- **data** folder includes samples and other data needed to run this example 
+- **image** folder includes information about the computational environment needed to run the example
+  - a container image, container definition file and a conda environment file
+- **scripts** includes a script that will be run as part of the workflow, in addition to other command line tools  
+- **Snakefile**  with all rules
+- **snakemake_hq_lumi.sh** for running the example on LUMI
+- **snakemake_hq_puhti.sh** for running the example on Puhti
+
+To run the example on UPPMAX, please use the Puhti batch job script.
+
+An example `snakemake_hq_puhti.sh` content is posted below:
 
 ```bash 
 #!/bin/bash
@@ -103,22 +107,11 @@ hq server stop
 
 ```
 
-### How do you parallelise snakemake workflow jobs?
+The default script provided above is not optimised to run in high-throughput way as snakemake workflow manager just submits **one job at a time** to the hyperqueue scheduler. You can parallelise workflow tasks (i.e., rules in snakemake) by submitting more jobs from snakemake command as below:
 
-The default script provided above is not optimised to run in high-throughput way as snakemake workflow manager
-just submits one job at a time to the hyperqueue scheduler. You can parallelise workflow tasks (i.e., rules in snakemake) 
-by submitting more jobs from *snakemake* command as below:
+`snakemake -s Snakefile --jobs 8 --use-singularity --executor cluster-generic --cluster-generic-submit-cmd "hq submit --cpus 5"`
 
-```bash
-snakemake -s Snakefile --jobs 8 --use-singularity --executor cluster-generic --cluster-generic-submit-cmd "hq submit --cpus 5"
-```
-
-You can correct above modification in the batch script (and use your own project number in sbatch directives) 
-before submitting the Snakemake workflow job to the HPC cluster as below:
-
-```
-sbatch snakemake_hq_puhti.sh
-```
+You can correct above modification in the batch script and run it with `sbatch snakemake_hq_puhti.sh`.
 
 One can also use more than one node to achieve even more high-throughput as HyperQueue can make use of multi-node resource allocations.
 
@@ -127,7 +120,8 @@ Please note that just by increasing the number jobs will not alone automatically
 In our case we submitted 8 parallel jobs, each taking 5 CPUs as we reserved 40 CPUs in batch script. 
 In practice it is a good idea to dedicate few CPUs for workflow manager itself. 
 
-### Follow the progress of jobs
+
+## Follow the progress of jobs
 
 You can already check the progress of your job by simply observing the current folder where you can see lot of new 
 task-specific folders are being created. However, there are formal ways to check the progress of your jobs as shown below:
@@ -170,9 +164,6 @@ snakemake -s Snakefile -j 24 --use-singularity --executor cluster-generic --clus
 
 ## More Information
 
-- [CSC documentation on Snakemake](https://docs.csc.fi/support/tutorials/snakemake-puhti/)
-- [Snakemake official documentation](https://snakemake.readthedocs.io/en/stable/)
+- [Hyperqueue documentation](https://it4innovations.github.io/hyperqueue/stable/)
+- [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/)
 
-```{keypoints}
-- TBD
-``
