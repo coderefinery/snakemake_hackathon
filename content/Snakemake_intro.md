@@ -79,7 +79,7 @@ You should be able to see the version of Snakemake installed on your system.
 
 ### Snakefile
 
-We can define Snakemake workflows using files called `Snakefile`s. Workflow are defined in terms of rules. Each rule describes input files, outputs and a command or script to be run. Let's have a look at a simple, one step workflow, that will copy the content of one file into another.
+We can define Snakemake workflows using so-called `Snakefile`s. Workflows are defined in terms of rules. Each rule describes input files, outputs and a command or script to be run. Let's have a look at a simple, one step workflow, that will copy the content of one file into another.
 
 ```bash
 rule copy:
