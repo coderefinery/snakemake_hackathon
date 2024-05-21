@@ -2,6 +2,7 @@
 
 Snakemake is a powerful workflow management system designed to create reproducible and scalable data analyses. Originating in the bioinformatics community, Snakemake has gained widespread use in various scientific and data-intensive fields. It allows users to define workflows in a simple, readable, and maintainable way using a Python-based language. With built-in support for parallel execution and resource management, Snakemake can efficiently handle workflows on various scales, from small-scale local computations to large-scale distributed computing environments.
 
+
 ```{objectives}
 
 - Understand the components and features of a Snakefile
@@ -69,7 +70,7 @@ rule copy:
 	    "cp {input} {output}"
 ```
 
-This Snakefile defines one input file `hello.txt`, one output file `hello_copy.txt` and a shell command `cp {input} {output}`. The shell command is formatted automatically by Snakemake. The `input` and `output` are substituted using the values provided in the previous section.
+This `Snakefile` defines one input file `hello.txt`, one output file `hello_copy.txt` and a shell command `cp {input} {output}`. The shell command is formatted automatically by Snakemake. The `input` and `output` are substituted using the values provided in the previous section.
 
 Before running, copy the content of the `Snakefile` into the file called `Snakefile` (without an extension) and create `hello.txt` file with some content:
 ```bash
@@ -142,7 +143,7 @@ Snakemake parses the `hello_copy.txt` argument and detects that the wildcard is 
 ### Python code in Snakefile
 
 Another powerful feature is the possibility to add Python code and function inside of Snakefile. We also have access to Python libraries, by using traditional `import` keyword. For example, the following code searches for all text files in the given directory, and appends their content in the `copy.txt` file.
-```Python
+```bash
 import os
 
 def find_txt_files(path):
@@ -161,7 +162,7 @@ rule append:
 How is this different than wildcards? Here, we did not resolve or specified any file. We can simply call `snakemake --cores 1` without any arguments. This workflow searches for the input files by itself, without any guidance.
 
 Another way of using Python is replacing the shell command with Python script:
-```Python
+```bash
 rule print_content:
     input:
 	    "hello.txt"
@@ -181,7 +182,7 @@ and modify the `Snakefile`:
 ```bash
 rule print_content:
     input:
-	    "hello.txt"
+        "hello.txt"
     script:
         "read_and_print.py"
 ```
@@ -275,71 +276,221 @@ However, there are situations where you might want to recompute the entire workf
 snakemake --cores 1 -F
 ```
 
-### Dependencies of steps
-
-DAG: Directed acyclic graphs are built when Snakemake is run
-
-- implicit parallelization (uses number of cores given to run tasks in parallel)
-- Resolves step dependencies before execution
+Besides forced execution, Snakemake may execute a rule again in two more cases: if the rule definition has changed since the last execution (for example by adding a new output file) or if the script that is executed has changed (only when using the `script` keyword). 
 
 ### Parallelization
 
-`threads`
-`--cores`
+So far, we only used Snakemake with one core (`--cores 1`). Let's say we have a workflow that processes four files. Each file is processed with two steps: `modify_file` and `count_words`. The processing takes some time, mostly due to the `sleep 5` command.
+```bash
+rule all:
+    input:
+        "results/word_count_file1.txt",
+        "results/word_count_file2.txt",
+        "results/word_count_file3.txt",
+        "results/word_count_file4.txt",
 
+rule modify_file:
+    params:
+        msg="This was modified by Snakemake!"
+    input:
+        "data/{file}.txt"
+    output:
+        "results/modified_{file}.txt",
+    shell:
+        "cat {input} > {output} && echo '{params.msg}' >> {output}  && sleep 5"
 
+rule count_words:
+    input:
+        "results/modified_{file}.txt",
+    output:
+        "results/word_count_{file}.txt",
+    shell:
+        "wc -w {input} > {output} && sleep 5"
+```
 
-### Python and Snakemake
+When we create a DAG for that workflow, we see that there are four branches in the graph - one for each file. If we run Snakemake with the following command:
+```bash
+snakemake --cores 1
+```
 
-- Snakemake object can be used in Python scripts
-- Custom Python functions
+The execution will take a little bit more than 40 seconds. Snakemake uses only one core, executing one job at a time. Let's increase number of cores to 2.
+```bash
+snakemake --cores 2 -F
+```
+Now we can see in the logs, that Snakemake is running two jobs at a time, using two cores. The execution time was around two times faster. Snakemake automatically detected, that some parts of the workflow can be run in parallel, and used the provided resources to parallelize the work. In this case, each file can be processed independently, there is no aggregation or combining the results.
+
 
 ### Error recovery and re-entry
 
-- `retries: X`
-- Keep going
-- Resume after failure
+Snakemake offers some error recovery features. Analyzing the above example, what would happen if one of the files that we try to modify is corrupted? Snakemake will automatically stop the execution of the entire workflow, even though three other files can be processed correctly. Although this behaviour may be useful in some cases, if we want to compute as many partial results as we can, we should use the `--keep-going` flag. It makes Snakemake keep going as far into workflow as it possibly can, computing all results that do not relay on the corrupted or failed jobs.
+```bash
+snakemake --cores 2 --keep-going
+```
 
+Another error recovery strategy is retrying:
+```bash
+rule get_data_from_server:
+    output:
+        "test.txt"
+    retries: 3
+    shell:
+        "curl https://some.unreliable.server/test.txt > {output}"
+```
 
-### Portability
-
-#### Conda
-
-#### Containers
-
-## Provenance features
-
-(from snakemake docs:)
-The ability to track the provenance of each generated result is an important step towards reproducible analyses. Apart from the report functionality discussed before, Snakemake can summarize various provenance information for all output files of the workflow. The flag --summary prints a table associating each output file with the rule used to generate it, the creation date and optionally the version of the tool used for creation is provided. Further, the table informs about updated input files and changes to the source code of the rule after creation of the output file. 
+Server does not respond with any data, so the `curl` command exists with an error. Snakemake quickly retires the job three times. Retrying can be set globally for all jobs using the `--retires` flag followed by the number of retries. 
 
 ## Reporting
 
-Basic report on run in terminal/ in file
+Reports in Snakemake are HTML documents that are generated after a workflow execution. They summarize the work done by Snakemake together with some statistics. Snakemake needs one package to generate the report: `pygments`. It can be installed with `pip`:
+```bash
+pip install pygments
+```
+Let's see how we can generate them. For that, we can use one of the previous workflows.
+```bash
+rule all:
+    input:
+        "results/word_count.txt"
 
-HTML report available after execution to provide statistics
+rule concatenate:
+    input:
+        expand("data/file{n}.txt", n=[1, 2, 3])
+    output:
+        "results/concatenated.txt"
+    shell:
+        "cat {input} > {output}"
 
-Monitoring availabe via panoptes (external tool)
-- during execution
-- live view and status
- 
-## Interoperability
+rule count_words:
+    input:
+        "results/concatenated.txt"
+    output:
+        "results/word_count.txt"
+    shell:
+        "wc -w {input} > {output}"
+```
 
-Workflows can be exported to eg Common Workflow Language (CWL) to be executed with other tools too (eg Cromwell, Toil ?) 
+Snakemake generates reports based on the execution logs placed in the `.snakemake` folder (it maybe hidden on your computer). After executing a workflow, Snakemake saves metadata about the execution in that folder. To generate report, we use the `--report` flag to the `snakemake` command followed by the filename.
+```bash
+snakemake --report report.html
+```
 
-Notes from here: https://snakemake.readthedocs.io/en/stable/executing/interoperability.html#cwl-export
+If we did not execute this workflow before running the report, Snakemake would still generate a report, but it would lack some statistics. We can add more information to the report, including the output data of our workflow. In such cases, data is added to the HTML document and can be downloaded. This way we can share the results (at least if they are quite small) with the report and execution information!
+```bash
+rule all:
+    input:
+        "results/word_count.txt"
 
-## Unit tests
+rule concatenate:
+    input:
+        expand("data/file{n}.txt", n=[1, 2, 3])
+    output:
+        report(
+            "results/concatenated.txt",
+            category="Step 1"
+        )
+    shell:
+        "cat {input} > {output}"
 
-Generate automatically with Snakemake.
+rule count_words:
+    input:
+        "results/concatenated.txt"
+    output:
+        report(
+            "results/word_count.txt",
+            category="Step 2"
+        )
+    shell:
+        "wc -w {input} > {output}"
+
+```
+Here, we included both text files in the report. After opening it, we can download them.
+
+
+## Monitoring
+
+Warning: this section may not work for Windows users!
+
+Snakemake offers monitoring feature. In this case, monitoring means have live insights into a workflow execution progress. Monitoring is offer via external tool called `panoptes`. It is a simple web page with an API to which Snakemake connects. It has to be deployed, but the process is easy.
+```bash
+pip install panoptes-ui
+```
+
+To run the server on the localhost (i.e. on our computer), we can just run the following command:
+```bash
+panoptes
+```
+To close the server, we can use `CTRL+C` in the terminal. The server is running by default on `http://127.0.0.1:5000`. If we open our browser and visit this website, we will see the graphical interface for monitoring workflows. Note that now we cannot use our terminal, because it is used by `panoptes`. We have to open a new one to be able to run new commands. To connect Snakemake to the monitoring, we modify our `snakemake` command:
+```bash
+snakemake --cores 1 --wms-monitor http://127.0.0.1:5000
+```
+If you server has a different URL, replace it in the command above. When we execute the workflow, we can see some basic statistics about the execution.
+
+Warning: this set-up might be not secure enough for the production use. See [this thread](https://github.com/panoptes-organization/panoptes/issues/172) for more details.
+
 
 ## Workflow reproducibility
 
-## Visualization
+Reproducibility in computational workflows ensures that an analysis can be consistently repeated with the same results, which is crucial for validating findings, ensuring transparency, and facilitating collaboration. It allows other researchers to verify results, understand methodologies, and build upon previous work.
 
-Example how to viz the workflow: https://coderefinery.github.io/reproducible-research/workflow-management/#visualizing-the-workflo## Visualization
+### Project structure 
 
-Example how to viz the workflow: https://coderefinery.github.io/reproducible-research/workflow-management/#visualizing-the-workfloww
-
-```{keypoints}
-- TBD
+Snakemake provides recommendations regarding project structure. 
 ```
+├── .gitignore
+├── README.md
+├── LICENSE.md
+├── workflow
+│   ├── rules
+|   │   ├── module1.smk
+|   │   └── module2.smk
+│   ├── envs
+|   │   ├── tool1.yaml
+|   │   └── tool2.yaml
+│   ├── scripts
+|   │   ├── script1.py
+|   │   └── script2.R
+│   ├── notebooks
+|   │   ├── notebook1.py.ipynb
+|   │   └── notebook2.r.ipynb
+│   ├── report
+|   │   ├── plot1.rst
+|   │   └── plot2.rst
+|   └── Snakefile
+├── config
+│   ├── config.yaml
+│   └── some-sheet.tsv
+├── results
+└── resources
+```
+
+Following the [documentation](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#distribution-and-reproducibility): 
+> The workflow code goes into a subfolder workflow, while the configuration is stored in a subfolder config. Inside of the workflow subfolder, the central Snakefile marks the entrypoint of the workflow (it will be automatically discovered when running snakemake from the root of above structure).
+
+> Workflows set up in above structure can be easily used and combined via the Snakemake module system. Such deployment can even be automated via Snakedeploy. Moreover, by publishing a workflow on Github and following a set of additional rules the workflow will be automatically included in the Snakemake workflow catalog, thereby easing discovery and even automating its usage documentation.
+
+Following this structures enables some of the features, as well as enhances reproducibility.
+
+### Containerization
+
+Containers, like Docker, provide a lightweight and portable way to package and run applications. They encapsulate an application and its dependencies, ensuring it runs consistently across different environments. Unlike virtual machines, containers share the host system's kernel but isolate the application's processes, filesystem, and resources. This makes containers more efficient in terms of performance and resource usage, allowing for quick startup times and easy scalability. Docker is a popular containerization platform that simplifies creating, deploying, and managing containers, making it an essential tool for modern software development and deployment.
+
+To use containers with Snakemake, we add the `container` keyword inside a rule:
+
+```bash
+rule copy:
+    container:
+        "docker://alpine:3.14"
+    input:
+	    "hello.txt"
+    output: 
+	    "hello_copy.txt"
+    shell:
+	    "cp {input} {output}"
+```
+
+To execute that Snakefile, we have to add the `--software-deployment-method` flag:
+```bash
+snakemake --cores 1 --software-deployment-method apptainer
+```
+When executed, Snakemake will run the `copy` job inside the `Alpine` image. Note that running that code requires the `apptainer` command to be available on your system.
+
+Snakemake supports also images from `shub` and `docker` repositories. Integrations with other solutions (like `podman`) should be added in the next versions. See [docs](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#running-jobs-in-containers) for the latest updates. 
