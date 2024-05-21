@@ -139,7 +139,7 @@ task-specific folders are being created. However, there are formal ways to check
     # or
     squeue -u $USER
     ```
-  ```
+  ```` 
   ````{group-tab} Sub task monitoring
     ```bash
     module load hyperqueue
