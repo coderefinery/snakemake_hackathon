@@ -18,7 +18,7 @@ Snakemake Hackathon
 
 .. toctree::
    :maxdepth: 1
-   :caption: Theory
+   :caption: Materials
 
    Snakemake_intro.md
    Snakemake_HPC.md
