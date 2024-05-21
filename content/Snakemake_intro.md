@@ -399,7 +399,6 @@ rule count_words:
         "wc -w {input} > {output}"
 ```
 
-Snakemake generates reports based on the execution logs placed in the `.snakemake` folder (it maybe hidden on your computer). After executing a workflow, Snakemake saves metadata about the execution in that folder. To generate report, we use the `--report` flag to the `snakemake` command followed by the filename.
 ```bash
 snakemake --report report.html
 ```
