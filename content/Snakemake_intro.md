@@ -18,36 +18,49 @@ Snakemake is a powerful workflow management system designed to create reproducib
 - Step defined by input, process, output
 - Connection through input and output files
 
-## Why workflow tools?
+```{figure} img/workflow.png
+:width: 60%
+```
 
-Example usecase from GUI -> multiple scripts run manually -> bash script to run all 
+## Workflow tools and why we need them?
 
-> Issues with bashscripts: running only parts (commenting/uncommenting), running only for some files 
+Imagine having some data processing workflow that takes raw data, converts and filters it, and finally produces some result, for example a plot. Each step of the workflow is done using command line tools and scripts written in different languages. You could run everything manually: step by step, checking each output and passing it to the next script or tool. 
 
-## Workflow tools
+Soon enough, you may start automating your work. The simplest way to automate would be to use bash script (if you are on Linux). Your script may look like this:
+```bash
+wget http://example.com/dataset_2024.zip
+unzip dataset_2024.zip
+python filter.py dataset_2024.txt filtered_dataset_2024.txt
+python transform.py filtered_dataset_2024.txt transformed_dataset_2024.txt
+Rscript stats.r filtered_dataset_2024.txt statistics.csv
+Rscript plot.r statistics.csv plot.png
+```
 
-- Many languages to define a workflow
-- "Framework" for executing a workflow
-- Heavily used in bioinformatics
+Although it works, this solution has some problems: 
+- How to quickly compute the results for the dataset from 2023? 
+- How to only run the `stats.r` script for unfiltered data? 
+- Have you noticed that I made a typo in the bash script and did not use transformed data for the `stats.r` script? 
+- How to compute the results for all datasets available (there are 100 of them) using a computer with 20 cores?
+
+As your workflows grow in terms of number of steps, but also the size of data, managing this workflow might become more and more problematic. Fortunately, over the years many solution arose to manage and automate workflows execution. They offer plenty of features, supporting different stages of working with workflows: starting with defining a workflow, executing it and finally, gathering and sharing the results.
 
 > By supporting the top layer, a workflow management system can promote the center layer, and thereby help to obtain true sustainability.
 
-```{figure} img/parallel_workflow.png
+```{figure} img/sustainability.jpeg
 :width: 60%
 :alt: Taken from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat V, Forster J, Lee S, Twardziok SO, Kanitz A, Wilm A, Holtgrewe M, Rahmann S, Nahnsen S, Köster J. Sustainable data analysis with Snakemake. F1000Res. 2021 Apr 19;10:33. doi: 10.12688/f1000research.29032.2. PMCID: PMC8114187.
 ```
 
-reproducible description of workflow, "smart"
-
-## Snakemake
-
-Why Snakemake?
+## Why Snakemake?
 
 - Highly popular tool: 11 new citations per week and over 1,000,000 downloads
-- Available as Python package (pip, conda), but not python specific
-- Python based syntax (easy read)
+- Available as Python package (pip, conda), but not Python specific!
+- Python-based syntax (easy to read, quick to develop)
 - Possible to extend with embedded Python code, but not necessary 
-- Snakemake workflow catalog
+- Supports multiple different scripting languages and all command line tools
+- Plenty of useful features for automating the work
+
+It is important to remember that Snakemake does not require Python knowledge or limits you to using Python code.  
 
 ### Installation
 
@@ -506,3 +519,11 @@ snakemake --cores 1 --software-deployment-method apptainer
 When executed, Snakemake will run the `copy` job inside the `Alpine` image. Note that running that code requires the `apptainer` command to be available on your system.
 
 Snakemake supports also images from `shub` and `docker` repositories. Integrations with other solutions (like `podman`) should be added in the next versions. See [docs](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#running-jobs-in-containers) for the latest updates. 
+
+## Summary
+
+Presented features are only a subset of all things that Snakemake has to offer. Feel free to check the [official documentation](https://snakemake.github.io) for the latest updates! There are also tutorials that cover most of the basics.
+
+Snakemake offers plenty of features that automate the process of creating, running and overseeing the execution. You can document your workflow using DAG and reports. It is easier to make better usage of resources thanks to the implicit parallelization. Error recovery helps with dealing with errors, which are inevitable.
+
+So far, we only used a personal computer. In that mode, Snakemake is using a so-called `local executor`, which uses resources of our computer. After a short break, you will learn how to use other types of executors, that allow for integrating with supercomputers and leveraging resources that they offer.
