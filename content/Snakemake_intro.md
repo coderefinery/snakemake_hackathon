@@ -443,7 +443,7 @@ Snakemake offers monitoring feature. In this case, monitoring means have live in
 pip install panoptes-ui
 ```
 
-To run the server on the localhost (i.e. on our computer), we can just run the following command:
+Panoptes will run a server on `localhost` (i.e. on our computer), which we can start using the following command:
 ```bash
 panoptes
 ```
