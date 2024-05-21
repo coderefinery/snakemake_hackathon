@@ -108,7 +108,7 @@ Snakemake executes the `Snakefile` with the one rule in it. The content is copie
 snakemake --cores 1 --snakefile Snakefile_2
 ```
 
-will run the `Snakefile_2`. Thanks to that, now we can also how multiple `Snakefile`s in one directory. The `--cores` flag tells Snakemake how many resources (cores) from our computer Snakemake can use to execute the workflow. It is mandatory flag, so one cannot omit it.
+will run the `Snakefile_2`. Thanks to that, now we can also have multiple `Snakefile`s in one directory. The `--cores` flag tells Snakemake how many resources (cores) from our computer Snakemake can use to execute the workflow. It is a mandatory flag, so one cannot omit it. You may however also use `--jobs` instead of `--cores` which does not make a difference on a local computer.
 
 ### Rules
 
