@@ -14,7 +14,8 @@ Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ 
 
 .. prereq::
 
-   - Depends on expected outcome; please read the supercomputing concept refresher and join the Snakemake intro session if you need it
+   - Depends on expected outcome; If needed, please read this material as supercomputing concept refresher: https://coderefinery.github.io/TTT4HPC_resource_management/#
+   If you are interested, also check the rest of the materials from "Tuesdays Tools and Techniques for HPC" (it is quite useful for daily working on clusters): https://scicomp.aalto.fi/training/scip/ttt4hpc-2024/
    - Supercomputer access
 
 
@@ -25,7 +26,7 @@ Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ 
 
    Snakemake_intro.md
    Snakemake_HPC.md
-   Toy_example.md
+   Hackathon.md
 
 .. toctree::
    :maxdepth: 1
