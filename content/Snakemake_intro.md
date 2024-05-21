@@ -344,7 +344,7 @@ snakemake --cores 1
 
 The execution will take a little bit more than 40 seconds. Snakemake uses only one core, executing one job at a time. Let's increase number of cores to 2. To run the full workflow again, even though the files have already been processed, remember to add the `--forceall` flag.
 ```bash
-snakemake --cores 2 -F
+snakemake --cores 2 --forceall
 ```
 Now we can see in the logs, that Snakemake is running two jobs at a time, using two cores. The execution time was around two times faster. Snakemake automatically detected, that some parts of the workflow can be run in parallel, and used the provided resources to parallelize the work. In this case, each file can be processed independently, there is no aggregation or combining the results.
 
