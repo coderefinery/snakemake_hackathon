@@ -37,7 +37,7 @@ Rscript plot.r statistics.csv plot.png
 ```
 
 Although it works, this solution has some problems: 
-- How to quickly compute the results for the dataset from 2023? 
+- How to quickly compute the results for a similar dataset from 2023? 
 - How to only run the `stats.r` script for unfiltered data? 
 - Have you noticed that I made a typo in the bash script and did not use transformed data for the `stats.r` script? 
 - How to compute the results for all datasets available (there are 100 of them) using a computer with 20 cores?
