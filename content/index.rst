@@ -2,10 +2,7 @@ Snakemake Hackathon
 ====================
 
 .. info::
-   These materials are work in progress!
-
-
-Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ organized on 22.05.24. 
+   Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ organized on 22.05.24. 
 
 .. image:: csc_geoportti_coderefinery_enccs_naiss_logos_horizontal.png
   :width: 400
@@ -14,7 +11,8 @@ Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ 
 
 .. prereq::
 
-   - Depends on expected outcome; please read the supercomputing concept refresher and join the Snakemake intro session if you need it
+   - Depends on expected outcome; If needed, please read this material as supercomputing concept refresher: https://coderefinery.github.io/TTT4HPC_resource_management/#
+   If you are interested, also check the rest of the materials from "Tuesdays Tools and Techniques for HPC" (it is quite useful for daily working on clusters): https://scicomp.aalto.fi/training/scip/ttt4hpc-2024/
    - Supercomputer access
 
 
@@ -25,7 +23,7 @@ Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ 
 
    Snakemake_intro.md
    Snakemake_HPC.md
-   Toy_example.md
+   Hackathon.md
 
 .. toctree::
    :maxdepth: 1
@@ -59,7 +57,7 @@ Learning outcomes
 After this course, participants will be able to...
 
 - Understand what is snakemake
-- Understand when it does make sense to use Snakemake, when not
+- Decide if using Snakemake fits their workflow
 - Implement own workflow with Snakemake
 - Move own workflow to the supercomputer
 
