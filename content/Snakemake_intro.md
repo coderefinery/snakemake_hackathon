@@ -64,7 +64,7 @@ It is important to remember that Snakemake does not require Python knowledge or 
 
 ### Installation
 
-To install Snakemake, we can use Python Package Installer (`pip`). First, ensure you have Python installed on your system.
+To install Snakemake on your own computer, we can use Python Package Installer (`pip`). First, ensure you have Python installed on your system.
 
 ```bash
 pip install snakemake
