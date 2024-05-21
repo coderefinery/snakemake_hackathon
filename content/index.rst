@@ -2,10 +2,7 @@ Snakemake Hackathon
 ====================
 
 .. info::
-   These materials are work in progress!
-
-
-Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ organized on 22.05.24. 
+   Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ organized on 22.05.24. 
 
 .. image:: csc_geoportti_coderefinery_enccs_naiss_logos_horizontal.png
   :width: 400
@@ -60,7 +57,7 @@ Learning outcomes
 After this course, participants will be able to...
 
 - Understand what is snakemake
-- Understand when it does make sense to use Snakemake, when not
+- Decide if using Snakemake fits their workflow
 - Implement own workflow with Snakemake
 - Move own workflow to the supercomputer
 
