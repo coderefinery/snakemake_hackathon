@@ -494,7 +494,7 @@ Snakemake provides recommendations regarding project structure.
 Following the [documentation](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#distribution-and-reproducibility): 
 > The workflow code goes into a subfolder workflow, while the configuration is stored in a subfolder config. Inside of the workflow subfolder, the central Snakefile marks the entrypoint of the workflow (it will be automatically discovered when running snakemake from the root of above structure).
 
-> Workflows set up in above structure can be easily used and combined via the Snakemake module system. Such deployment can even be automated via Snakedeploy. Moreover, by publishing a workflow on Github and following a set of additional rules the workflow will be automatically included in the Snakemake workflow catalog, thereby easing discovery and even automating its usage documentation.
+> Workflows that are set up in above structure can be more easily re-used and combined via the [Snakemake module system](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#use-with-modules). Such deployment can even be automated via [Snakedeploy](https://snakedeploy.readthedocs.io/en/latest/). Moreover, by publishing a workflow on Github and following a set of additional rules the workflow will be automatically included in the [Snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog/), thereby easing discovery and even automating its usage documentation.
 
 Following this structures enables some of the features, as well as enhances reproducibility.
 
