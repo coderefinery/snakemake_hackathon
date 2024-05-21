@@ -20,31 +20,21 @@ If you need additional packages, you can usually add own packages by `pip instal
 Ask your friendly cluster support for help or advice, if needed. 
 
 
-## Rule based resources
-
-You can define resources per rule in your snakefile. E.g. one rule may require 4 CPUs to compute, then `threads: 4` can be added to that rule. Snakemake is then run with `--jobs = 4` as argument.
-
-* Other rules are automatically run in parallel until all resources are used
-* Rule requesting all available resources, i.e. `threads:4` when `--jobs = 4` will use all available resources, and will therefore not run in parallel with other rules
-
-> Note that if number of jobs/cores given to the workflow is smaller than the number of cores requested by a rule, the rule will be run with the amount of cores available to it, i.e. scaled down.
-
-
 ## Ways of running Snakemake on clusters
 
 ### Within one SLURM job
 
 #### Interactive
 
-You can run snakemake the same way you would run it on your own computer also on cluster within one interactive or normal batch job (one resource allocation for all rules). This is a useful first step to try it out, but does not scale well (only to the resource limits of one job).
+You can run snakemake the same way you would run it on your own computer also on cluster within one interactive or normal batch job (one resource allocation for the whole workflow (= all rules)). The interactive session is is a useful first step to try it out, but does not scale well (only to the resource limits of one interactive job).
 
-In an interactive job (using the interactive partition; some clusters also support `Sinteractive` command), you would load the snakemake module, and then run `snakemake --jobs = 1`.
+In an interactive job (using the interactive partition; some clusters support starting an interactive session with the `sinteractive` command), you would load the snakemake module, and then run `snakemake --cores 1` (or more, if you reserved more) as you would on your local machine.
 
-You can run snakemake in the background for example with `screen`.
+You can run snakemake in the background for example with [`screen`](https://linux.die.net/man/1/screen).
 
 ##### Sbatch script
 
-Another way to run snakemake in **one job** is to use an sbatch script for submission.
+Another way to run snakemake in **one job** is to use an sbatch script for job submission to run the workflow non-interactive.
 
 ```
 #!/bin/bash
@@ -56,22 +46,28 @@ Another way to run snakemake in **one job** is to use an sbatch script for submi
 #SBATCH --cpus-per-task=4
 
 module load snakemake/version
-snakemake -s Snakefile --jobs 4
+snakemake --cores 4
 ```
+
+Note how 4 CPUs are reserved ( `#SBATCH --cpus-per-task=4`) and made available to the workflow (`--cores 4`). Within the Snakefile resource distribution and parallelization can be controlled using `threads:X` directive, see the [Snakemake documentation on threads](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#threads).
 
 #### Slurm integration with the [Snakemake SLURM executor plugin](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html)
 
 With the plugin you can define SLURM batch job resources for your snakemake workflow instead of writing an sbatch file.
 
-Snakemake provides a [Snakemake SLURM executor](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html) as plugin, which can be used to run Snakemake workflows on clusters:
+Snakemake provides a [Snakemake SLURM executor](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html) as plugin, which can be used to let Snakemake run workflows on clusters. For this, you would start an interactive session, from which you could call :
 
 ```
 module load snakemake/version
 
-snakemake -s Snakefile --keep-going  --jobs 1 --executor slurm --default-resources slurm_account=project_xxx slurm_partition=small  
+snakemake --jobs 1 --executor slurm --default-resources slurm_account=project_xxx slurm_partition=test runtime=10 mem_mb_per_cpu=2000 cpus_per_task=4
 ```
 
-The SLURM integration also provides the possibility to start multiple jobs for you; for example one for each rule. However, with this option you would have to wait in queue for every single step to be executed which generates a lot of overhead, especially for small jobs. Using the Snakemake SLURM integration this way should therefore be avoided in cases where single steps are short. A better solution to scale up your Snakemake workflow (also to multiple nodes) is to use Hyperqueue instead:
+This command would submit **one new job** (defined by `--jobs 1`) to SLURM for running the whole workflow in that job, similar to the sbatch script above. Instead of defining `cpus_per_task` for the whole workflow, one could also define `threads:X` for each rule.
+
+Other SLURM resource specifications can be found from the table in the [SLURM executor plugin documentation](https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html#advanced-resource-specifications).
+
+The SLURM integration also provides the possibility to start multiple SLURM jobs (specified by setting `--jobs` to > 1) for you; for example one for each step. However, with this option you would have to wait in queue for every single step to be executed which generates a lot of overhead, especially for short job steps. Using the Snakemake SLURM integration this way should therefore be avoided in cases where single steps are short. A better solution to scale up your Snakemake workflow (also to multiple nodes) is to use Hyperqueue instead:
 
 ### Snakemake at scale using Hyperqueue
 
@@ -81,12 +77,14 @@ The [generic cluster executor](https://snakemake.github.io/snakemake-plugin-cata
 - Useful for high-throughput jobs (many steps and rules on many files, needing a lot of resources)
 - Extra benefit: Multiple nodes can be used under the same job allocation
 
+For more information, please check out the provided Hyperqueue example.
+
 
 ## Config/Profile files
 
 Snakemake takes many parameters as command line arguments/flags. However, when working with clusters these can become quite many very fast. Many of which also do not change very often, e.g. `slurm-account`. One way to make the command line call shorter, is to define some of the parameters in [**profiles**](https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles). These can be global or workflow specific. 
 
-A profile is written in `YAML format` and can be provided to Snakemake using the `--profile` flag. Option `--someoption` becomes `someoption: ` in the profile. Example profile:
+A profile is written in `YAML format` and usually called `config.yml` and can be provided to Snakemake using the `--profile` flag (Note to only provide the path where Snakemake should look for the profile file, e.g. `profiles/slurm/` (without the profile filename)). An option defined by `--someoption` in the Snakemake command line call becomes `someoption: ` in the profile. Example profile:
 
 ```
 jobs: 1
@@ -94,15 +92,17 @@ default-resources:
   slurm_account: project_xxx
 ```
 
+Check out another [Snakemake profile example from the Tuesdays Tools and Techniques course](https://coderefinery.github.io/TTT4HPC_parallel_workflows/parallelization/parallelize_using_workflow_manager/#create-and-run-snakemake-workflow).
+
 ## Good practices
 
 - General: 
     - As with all code, it is advised to also keep your Snakefiles under **version control**, e.g. using `git`
     - Consider **containerizing** your whole workflow for portability
 - When running Snakemake on clusters: 
-    - Try to avoid unnecessary read and write operations, check if use of fast local disk is possible
+    - Try to **avoid unnecessary read and write operations**, check if use of fast local disk is possible
     - Consider summarizing small jobs/job steps into one job  when you want to use the SLURM plugin to limit SLURM accounting overhead, e.g. by [job grouping](https://snakemake.readthedocs.io/en/stable/executing/grouping.html)
-    - Try to avoid creating a lot of files, especially in the same folder, e.g. by letting [snakemake remove temporary files after the job is finnished](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#protected-and-temporary-files)
+    - Try to avoid creating a lot of files, especially in the same folder, [Snakemake can remove temporary files after the job is finnished](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#protected-and-temporary-files).
 
 ##  Cluster specific information
 
