@@ -138,7 +138,7 @@ rule sorter:
 ```
 
 ### Wildcards
-In the examples above we used hard-coded filenames to tell the input or output values. To make the workflows more generalized, we can use wildcards. Wildcards are variables that are replacing the actual filenames or any other value, like for example a path. Snakemake resolves them automatically based on either the target file or other input/outputs in a Snakefile. Let's add wildcards to the copy example, so it will work for any text file:
+In the examples above we used hard-coded filenames to define the input and output values. This is not feasible for most workflows dealing with more than a few files. To generalize the workflows, we can use wildcards. Wildcards are variables that replace the actual filenames or any other value, like for example a path. Snakemake resolves them automatically based on either the target file or other input/outputs in the Snakefile. Let's add wildcards to the copy example, so it will work for any text file:
 ```bash
 rule copy:
     input:
