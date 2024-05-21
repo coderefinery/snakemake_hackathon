@@ -61,11 +61,13 @@ The downloaded material includes scripts and data to run snakemake pipeline:
 - **image** folder includes information about the computational environment needed to run the example
   - a container image, container definition file and a conda environment file
 - **scripts** includes a script that will be run as part of the workflow, in addition to other command line tools  
-- **Snakefile**  with all rules
+- **Snakefile**  with all rules defining the workflow
 - **snakemake_hq_lumi.sh** for running the example on LUMI
 - **snakemake_hq_puhti.sh** for running the example on Puhti
 
-To run the example on UPPMAX, please use the Puhti batch job script.
+To run the example on UPPMAX and others, please use the Puhti batch job script.
+
+The computing environment for running the job is provided as container image (`image/tutorial.sif`), you can check the container definition file `image/tutorial.def` and the conda environment `image/tutorial.yaml` file for the contents of the image.
 
 An example `snakemake_hq_puhti.sh` content is posted below:
 
@@ -96,6 +98,7 @@ srun --exact --cpu-bind=none --mpi=none hq worker start --cpus=${SLURM_CPUS_PER_
 
 hq worker wait "${SLURM_NTASKS}"
 
+# `--use-singularity` tells snakemake to make use of the singularity directive in the snakefile (line 4)
 snakemake -s Snakefile --jobs 1 --use-singularity --executor cluster-generic --cluster-generic-submit-cmd "hq submit --cpus 5"
 
 # for snakemake versions 7.x.xx, use command: snakemake -s Snakefile --jobs 1 --use-singularity --cluster "hq submit --cpus 2"
@@ -107,18 +110,18 @@ hq server stop
 
 ```
 
-The default script provided above is not optimised to run in high-throughput way as snakemake workflow manager just submits **one job at a time** to the hyperqueue scheduler. You can parallelise workflow tasks (i.e., rules in snakemake) by submitting more jobs from snakemake command as below:
+The default script provided above is not optimised to run in high-throughput way as snakemake workflow manager just submits **one job at a time** (defined as `--jobs 1`) to the hyperqueue scheduler. You can parallelise workflow tasks (i.e., rules in snakemake) by submitting more jobs snakemake as below:
 
 `snakemake -s Snakefile --jobs 8 --use-singularity --executor cluster-generic --cluster-generic-submit-cmd "hq submit --cpus 5"`
 
-You can correct above modification in the batch script and run it with `sbatch snakemake_hq_puhti.sh`.
+Correct this modification (exchanging 1 with 8 for number of jobs) in the batch script and run the batch script with `sbatch snakemake_hq_puhti.sh`.
 
 One can also use more than one node to achieve even more high-throughput as HyperQueue can make use of multi-node resource allocations.
 
-Please note that just by increasing the number jobs will not alone automatically run all those jobs. 
+Please note that just increasing the number jobs will not alone automatically run all those jobs at the same time. 
 *Jobs* parameter from *snakemake* is just a maximum limit for concurrent jobs. Jobs will be eventually run when resources are available. 
-In our case we submitted 8 parallel jobs, each taking 5 CPUs as we reserved 40 CPUs in batch script. 
-In practice it is a good idea to dedicate few CPUs for workflow manager itself. 
+In our case we will have up to 8 parallel steps running, each taking 5 CPUs using all of the reserved 40 CPUs in batch script. 
+In practice, it is a good idea to dedicate few CPUs for the workflow manager itself. 
 
 
 ## Follow the progress of jobs
