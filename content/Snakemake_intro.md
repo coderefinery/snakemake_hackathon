@@ -257,7 +257,7 @@ Snakemake will see that we want the `results/word_count.txt` file, and will sear
 ```bash
 snakemake --cores 1 --dag
 ```
-The result can be visualized using either the `GraphViz` package, or online on [this site](https://www.google.com/url?sa=t&source=web&rct=j&opi=89978449&url=https://dreampuf.github.io/GraphvizOnline/&ved=2ahUKEwjLk6SBqJyGAxVCLRAIHVNWBZMQFnoECBQQAQ&usg=AOvVaw2Sw6OnaIb_oZkOtu44VcNz).
+The result can be visualized using either the `GraphViz` package (which needs to be installed separately, see example call below), or using [GraphVizOnline](https://dreampuf.github.io/GraphvizOnline/).
 ```bash
 snakemake --cores 1 --dag | dot -Tpng > dag.png
 ```
