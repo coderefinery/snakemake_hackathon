@@ -175,7 +175,7 @@ rule append:
 	    "cat {input} >> {output}"
 ```
 
-How is this different than wildcards? Here, we did not resolve or specified any file. We can simply call `snakemake --cores 1` without any arguments. This workflow searches for the input files by itself, without any guidance.
+How is this different than wildcards? Here, we did not resolve or specify any filename. We can call `snakemake --cores 1` without any arguments. This workflow searches for the input files by itself, without any guidance. Use with care, and for example test that the files that are found are the ones you actually want to process by doing a dry-run, using `--dry-run` when calling Snakemake.
 
 Another way of using Python is replacing the shell command with Python script:
 ```bash
