@@ -103,7 +103,7 @@ To run the `Snakefile`, we run the following command:
 snakemake --cores 1
 ```
 
-Snakemake executes the `Snakefile` with the one rule in it. The content is copied! Note two things: the `--cores` flag and that we did not specified the `Snakefile`. By default, Snakemake will search for a `Snakefile` in the current directory. We can specify which `Snakefile` to run using the `-s` flag. For example:
+Snakemake executes the `Snakefile` with the one rule in it. The content is copied! Note two things: the `--cores` flag and that we did not specified the `Snakefile`. By default, Snakemake will search for a `Snakefile` in the current directory. We can specify which `Snakefile` to run using the `--snakefile` flag. For example:
 ```bash
 snakemake --cores 1 -s Snakefile_2
 ```
