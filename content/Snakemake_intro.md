@@ -356,7 +356,7 @@ Snakemake offers error recovery features. Analyzing the above example, what woul
 snakemake --cores 2 --keep-going
 ```
 
-Another error recovery strategy is retrying:
+Another error recovery strategy is retrying, which is useful for example when your workflow relies on some online resource.
 ```bash
 rule get_data_from_server:
     output:
