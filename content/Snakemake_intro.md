@@ -20,6 +20,7 @@ Snakemake is a powerful workflow management system designed to create reproducib
 
 ```{figure} img/workflow.png
 :width: 60%
+:alt: Example of a workflow
 ```
 
 ## Workflow tools and why we need them?
@@ -47,7 +48,7 @@ As your workflows grow in terms of number of steps, or also the size of dataset,
 > By supporting the top layer, a workflow management system can promote the center layer, and thereby help to obtain true sustainability.
 
 ```{figure} img/sustainability.jpeg
-:width: 60%
+:width: 100%
 :alt: Hierarchy of aspects to consider for sustainable data analysis.
 
 Image from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat V, Forster J, Lee S, Twardziok SO, Kanitz A, Wilm A, Holtgrewe M, Rahmann S, Nahnsen S, Köster J. Sustainable data analysis with Snakemake. F1000Res. 2021 Apr 19;10:33. doi: 10.12688/f1000research.29032.2. 
