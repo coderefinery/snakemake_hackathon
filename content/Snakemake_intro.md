@@ -24,6 +24,11 @@ Example usecase from GUI -> multiple scripts run manually -> bash script to run 
 
 > Issues with bashscripts: running only parts (commenting/uncommenting), running only for some files 
 
+```{figure} img/parallel_workflow.png
+:width: 60%
+:alt: Taken from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat V, Forster J, Lee S, Twardziok SO, Kanitz A, Wilm A, Holtgrewe M, Rahmann S, Nahnsen S, Köster J. Sustainable data analysis with Snakemake. F1000Res. 2021 Apr 19;10:33. doi: 10.12688/f1000research.29032.2. PMCID: PMC8114187.
+```
+
 ## Workflow tools
 
 - Many languages to define a workflow
@@ -88,11 +93,6 @@ snakemake --cores 1 -s Snakefile_2
 ```
 
 will run the `Snakefile_2`. Thanks to that, now we can also how multiple `Snakefile`s in one directory. The `--cores` flag tells Snakemake how many resources (cores) from our computer Snakemake can use to execute the workflow. It is mandatory flag, so one cannot omit it.
-
-
-- Definition of the workflow via rules
-- File based approach
-- `expand`
 
 ### Rules
 
@@ -243,7 +243,7 @@ The result can be visualized using either the `GraphViz` package, or online on [
 snakemake --cores 1 --dag | dot -Tpng > dag.png
 ```
 
-One improvement to this `Snakefile` would be to directly refer to the outputs of the rules by using the rule's name. This approach is more robust, as we can freely change the output names, without breaking the workflow. Remember that you can only refer to the rules that were defined before, so we cannot modify in that way the `all` rule)! 
+One improvement to this `Snakefile` would be to directly refer to the outputs of the rules by using the rule's name. This approach is more robust, as we can freely change the output names, without breaking the workflow. Remember that you can only refer to the rules that were defined before, so we cannot modify in that way the `all` rule! 
 ```bash
 rule all:
     input:
@@ -308,7 +308,13 @@ rule count_words:
         "wc -w {input} > {output} && sleep 5"
 ```
 
-When we create a DAG for that workflow, we see that there are four branches in the graph - one for each file. If we run Snakemake with the following command:
+When we create a DAG for that workflow, we see that there are four branches in the graph - one for each file. 
+
+```{figure} img/parallel_workflow.png
+:width: 60%
+```
+
+If we run Snakemake with the following command:
 ```bash
 snakemake --cores 1
 ```
