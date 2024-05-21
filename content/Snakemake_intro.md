@@ -149,7 +149,7 @@ rule copy:
 	    "cp {input} {output}"
 ```
 
-To run it, we have to tell Snakemake the value of the `data` wildcard. We can do that, by specifying what kind of output file we want to produce. In this case, we want to have `hello_copy.txt` - the copy of the `hello.txt` file.
+To run it, we have to tell Snakemake the value of the `data` wildcard. We can do that, by specifying what kind of output /target file we want to produce. In this case, we want to have `hello_copy.txt` - the copy of the `hello.txt` file.
 ```bash
 snakemake --cores 1 hello_copy.txt
 ```
