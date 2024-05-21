@@ -342,7 +342,7 @@ If we run Snakemake with the following command:
 snakemake --cores 1
 ```
 
-The execution will take a little bit more than 40 seconds. Snakemake uses only one core, executing one job at a time. Let's increase number of cores to 2.
+The execution will take a little bit more than 40 seconds. Snakemake uses only one core, executing one job at a time. Let's increase number of cores to 2. To run the full workflow again, even though the files have already been processed, remember to add the `--forceall` flag.
 ```bash
 snakemake --cores 2 -F
 ```
