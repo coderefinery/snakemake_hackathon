@@ -292,7 +292,7 @@ Snakemake is designed to efficiently manage the execution of complex workflows b
 However, there are situations where you might want to recompute the entire workflow, regardless of the existing files. In such cases, you can force Snakemake to recompute all the steps by using the `-F` or `--forceall` flag. This tells Snakemake to ignore the existing output files and re-run all the rules as if the files were missing.
 
 ```bash
-snakemake --cores 1 -F
+snakemake --cores 1 --forceall
 ```
 
 Besides forced execution, Snakemake may execute a rule again in two more cases: if the rule definition has changed since the last execution (for example by adding a new output file) or if the script that is executed has changed (only when using the `script` keyword). 
