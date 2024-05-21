@@ -500,7 +500,7 @@ Following the [documentation](https://snakemake.readthedocs.io/en/stable/snakefi
 
 ### Containerization
 
-Containers, like Docker, provide a lightweight and portable way to package and run applications. They encapsulate an application and its dependencies, ensuring it runs consistently across different environments. Unlike virtual machines, containers share the host system's kernel but isolate the application's processes, filesystem, and resources. This makes containers more efficient in terms of performance and resource usage, allowing for quick startup times and easy scalability. Docker is a popular containerization platform that simplifies creating, deploying, and managing containers, making it an essential tool for modern software development and deployment.
+Containers, like Docker or Singularity/Apptainer, provide a lightweight and portable way to package and run applications. They encapsulate an application and its dependencies, ensuring it runs consistently across different environments. Unlike virtual machines, containers share the host system's kernel but isolate the application's processes, filesystem, and resources. This makes containers more efficient in terms of performance and resource usage, allowing for quick startup times and easier scalability. 
 
 To use containers with Snakemake, we add the `container` keyword inside a rule, linking either to a local or external container image:
 
