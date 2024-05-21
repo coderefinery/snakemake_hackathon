@@ -1,6 +1,6 @@
 # Hyperqueue example: Snakemake at Scale 
 
-This example is adapted from ["Using CSC Computing Environment Efficiently"](https://csc-training.github.io/csc-env-eff/) course.
+This example is adapted from ["Using CSC Computing Environment Efficiently"](https://csc-training.github.io/csc-env-eff/) course and the [official Snakemake tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/basics.html).
 
 ## Use HyperQueue Executor to Submit Jobs
 
@@ -68,6 +68,8 @@ The downloaded material includes scripts and data to run snakemake pipeline:
 To run the example on UPPMAX and others, please use the Puhti batch job script.
 
 The computing environment for running the job is provided as container image (`image/tutorial.sif`), you can check the container definition file `image/tutorial.def` and the conda environment `image/tutorial.yaml` file for the contents of the image.
+
+The Snakefile describes a workflow from bioinformatics and is described in detail in the [official Snakemake tutorial](https://snakemake.readthedocs.io/en/stable/tutorial/basics.html).
 
 An example `snakemake_hq_puhti.sh` content is posted below:
 
