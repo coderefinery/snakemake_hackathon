@@ -370,7 +370,9 @@ In cases where a server does not respond with any data, the `curl` command exist
 
 ## Reporting
 
-Reports in Snakemake are HTML documents that are generated after a workflow execution. They summarize the work done by Snakemake together with some statistics. Snakemake needs one package to generate the report: `pygments`. It can be installed with `pip`:
+Snakemake generates execution logs with the content that is also printed in the terminal and stores them in the (hidden) `.snakemake` directory located in the directory where the `snakemake` command is executed . After executing a workflow, Snakemake saves metadata about the execution in that directory. To generate a proper report, we use the `--report` flag when executing the `snakemake` command followed by the filename for the report.
+
+Reports in Snakemake are `html` documents that are generated after workflow execution. They summarize the work done by Snakemake together with some statistics. To generate `html` reports, an extra Python package called `pygments` needs to be installed, for example using `pip`:
 ```bash
 pip install pygments
 ```
