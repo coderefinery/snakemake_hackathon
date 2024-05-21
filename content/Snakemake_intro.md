@@ -24,16 +24,18 @@ Example usecase from GUI -> multiple scripts run manually -> bash script to run 
 
 > Issues with bashscripts: running only parts (commenting/uncommenting), running only for some files 
 
-```{figure} img/parallel_workflow.png
-:width: 60%
-:alt: Taken from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat V, Forster J, Lee S, Twardziok SO, Kanitz A, Wilm A, Holtgrewe M, Rahmann S, Nahnsen S, Köster J. Sustainable data analysis with Snakemake. F1000Res. 2021 Apr 19;10:33. doi: 10.12688/f1000research.29032.2. PMCID: PMC8114187.
-```
-
 ## Workflow tools
 
 - Many languages to define a workflow
 - "Framework" for executing a workflow
 - Heavily used in bioinformatics
+
+> By supporting the top layer, a workflow management system can promote the center layer, and thereby help to obtain true sustainability.
+
+```{figure} img/parallel_workflow.png
+:width: 60%
+:alt: Taken from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat V, Forster J, Lee S, Twardziok SO, Kanitz A, Wilm A, Holtgrewe M, Rahmann S, Nahnsen S, Köster J. Sustainable data analysis with Snakemake. F1000Res. 2021 Apr 19;10:33. doi: 10.12688/f1000research.29032.2. PMCID: PMC8114187.
+```
 
 reproducible description of workflow, "smart"
 
@@ -41,6 +43,7 @@ reproducible description of workflow, "smart"
 
 Why Snakemake?
 
+- Highly popular tool: 11 new citations per week and over 1,000,000 downloads
 - Available as Python package (pip, conda), but not python specific
 - Python based syntax (easy read)
 - Possible to extend with embedded Python code, but not necessary 
@@ -163,28 +166,32 @@ How is this different than wildcards? Here, we did not resolve or specified any 
 
 Another way of using Python is replacing the shell command with Python script:
 ```bash
-rule print_content:
+rule copy:
     input:
 	    "hello.txt"
+    output:
+        "hello_copy.txt"
     run:
-        with open(input[0]) as in_file:
-            for l in in_file:
-                print(l)
+        with open(input[0]) as in_f, open(output[0], "w") as out_f:
+            for l in in_f:
+                out_f.write(l)
 ```
 
-This approach is fine for small code snippets. For bigger scripts, it is better to move code to a separate file and call it in the `Snakefile`. Let's create the `read_and_print.py` file:
+This approach is fine for small code snippets. For bigger scripts, it is better to move code to a separate file and call it in the `Snakefile`. Let's create the `copy.py` file:
 ```Python
-with open(snakemake.input[0]) as in_file:
-    for l in in_file:
-        print(l)
+with open(snakemake.input[0]) as in_f, open(snakemake.output[0], "w") as out_f:
+    for l in in_f:
+        out_f.write(l)
 ```
 and modify the `Snakefile`:
 ```bash
-rule print_content:
+rule copy:
     input:
         "hello.txt"
+    output:
+        "hello_copy.txt"
     script:
-        "read_and_print.py"
+        "copy.py"
 ```
 In the Python file, we have access to the `snakemake` object, which allows us to get access to input and output files! We do not need to parse any command line arguments. The access is granted because of the `script` keyword, which works like a wrapper around the script. Similar integrations are available for other languages as well: R, Markdown, Julia, Rust, Bash and Jupyter Notebook. See the current list in the [docs](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#external-scripts)
 
@@ -207,7 +214,6 @@ rule count_words:
         "results/word_count.txt"
     shell:
         "wc -w {input} > {output}"
-    default_target: True
 ```
 This workflow concatenates three input files (`data/file1`, `data/file2`, `data/file3`) and then counts how many words there are. The `Snakefile` consists of three rules. The dependencies between rules are defined by the input and output filenames. The rule `concatenate` generates the output file: `results/concatenated.txt`, which then is used as a input to the `count_words` rule. 
 
