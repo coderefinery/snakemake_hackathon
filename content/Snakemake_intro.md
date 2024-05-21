@@ -40,7 +40,7 @@ Although it works, this solution has some problems:
 - How to quickly compute the results for a similar dataset from 2023? 
 - How to only run the `stats.r` script for unfiltered data? 
 - Have you noticed that I made a typo in the bash script and did not use transformed data for the `stats.r` script? 
-- How to compute the results for all datasets available (there are 100 of them) using a computer with 20 cores?
+- How to compute the results for all datasets available (there are 100 of them) using a computer with 20 CPU cores?
 
 As your workflows grow in terms of number of steps, or also the size of dataset, managing this workflow might become more and more problematic. Fortunately, over the years many solutions arose to manage and automate workflow execution. They offer plenty of features, supporting different stages of workflows: starting with the definition of a workflow, executing it and finally, gathering and sharing the results.
 
