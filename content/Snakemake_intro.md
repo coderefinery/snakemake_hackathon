@@ -228,7 +228,7 @@ rule count_words:
     shell:
         "wc -w {input} > {output}"
 ```
-This workflow concatenates three input files (`data/file1`, `data/file2`, `data/file3`) and then counts how many words there are. The `Snakefile` consists of three rules. The dependencies between rules are defined by the input and output filenames. The rule `concatenate` generates the output file: `results/concatenated.txt`, which then is used as a input to the `count_words` rule. 
+This workflow concatenates three input files (`data/file1.txt`, `data/file2.txt`, `data/file3.txt` using `expand`, another way to define e.g. filenames more specific than wildcards) and then counts how many words there are in the files using the command line tool `wc`. The `Snakefile` consists of three rules. The dependencies between rules are set by the input and output filenames. The rule `concatenate` generates the output file: `results/concatenated.txt`, which then is used as an input to the `count_words` rule. 
 
 Snakemake uses top-down approach to automatically resolve the dependencies between rules. That means, Snakemake will start from the last rule (so-called target rule) and go backwards, searching for the input needed to execute that step. By default, the target rule is the first rule in the Snakefile. In this case, we want to run the `count_words` rule as the target (first we concatenate, then we count the words). We have to somehow tell Snakemake what is the final output of this workflow. To achieve that, a common practice is adding a mock `rule all` at the beginning of the `Snakefile` that encapsulates the final outputs of the workflow:
 ```bash
