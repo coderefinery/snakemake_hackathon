@@ -376,7 +376,7 @@ Reports in Snakemake are `html` documents that are generated after workflow exec
 ```bash
 pip install pygments
 ```
-Let's see how we can generate them. For that, we can use one of the previous workflows.
+Let's see how we can generate a report. For that, we can use one of the previous workflows.
 ```bash
 rule all:
     input:
