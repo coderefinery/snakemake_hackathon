@@ -42,7 +42,7 @@ Although it works, this solution has some problems:
 - Have you noticed that I made a typo in the bash script and did not use transformed data for the `stats.r` script? 
 - How to compute the results for all datasets available (there are 100 of them) using a computer with 20 cores?
 
-As your workflows grow in terms of number of steps, but also the size of data, managing this workflow might become more and more problematic. Fortunately, over the years many solution arose to manage and automate workflows execution. They offer plenty of features, supporting different stages of working with workflows: starting with defining a workflow, executing it and finally, gathering and sharing the results.
+As your workflows grow in terms of number of steps, or also the size of dataset, managing this workflow might become more and more problematic. Fortunately, over the years many solutions arose to manage and automate workflow execution. They offer plenty of features, supporting different stages of workflows: starting with the definition of a workflow, executing it and finally, gathering and sharing the results.
 
 > By supporting the top layer, a workflow management system can promote the center layer, and thereby help to obtain true sustainability.
 
