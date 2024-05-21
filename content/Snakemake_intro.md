@@ -403,7 +403,7 @@ rule count_words:
 snakemake --report report.html
 ```
 
-If we did not execute this workflow before running the report, Snakemake would still generate a report, but it would lack some statistics. We can add more information to the report, including the output data of our workflow. In such cases, data is added to the HTML document and can be downloaded. This way we can share the results (at least if they are quite small) with the report and execution information!
+We can add more information to the report, including the output data of our workflow. In such cases, data is added to the HTML document and can be downloaded. This way we can share the results (at least if they are quite small) with the report and execution information!
 ```bash
 rule all:
     input:
