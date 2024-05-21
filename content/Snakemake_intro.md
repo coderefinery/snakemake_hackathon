@@ -523,7 +523,6 @@ snakemake --cores 1 --software-deployment-method apptainer
 ```
 When executed, Snakemake will run the `copy` job inside the `Alpine` (one of the Linux operating systems) image. Note that running that code requires the `apptainer` command to be available on your system.
 
-Snakemake supports also images from `shub` and `docker` repositories. Integrations with other solutions (like `podman`) should be added in the next versions. See [docs](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#running-jobs-in-containers) for the latest updates. 
 
 ## Summary
 
