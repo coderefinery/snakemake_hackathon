@@ -299,7 +299,11 @@ Besides forced execution, Snakemake may execute a rule again in two more cases: 
 
 ### Parallelization
 
-So far, we only used Snakemake with one core (`--cores 1`). Let's say we have a workflow that processes four files. Each file is processed with two steps: `modify_file` and `count_words`. The processing takes some time, mostly due to the `sleep 5` command.
+So far, we only used Snakemake with one core (`--cores 1`). Let's say we have a workflow that processes four files. Each file is processed with two steps: `modify_file` and `count_words`. 
+
+The rule `modify_file` copies the content of the input file to the outputfile using `cat` and redirection `>`, then appends the content of the params directive to the output file using `echo` and redirect append `>>`. In the end the process pauses for 5 seconds using `sleep 5`.
+
+The rule `count_words` uses the command line tool `wc` with the argument `-w` to count the number of words in the input file and writes the number to the output file. In the end the process pauses for 5 seconds using `sleep 5`.
 ```bash
 rule all:
     input:
