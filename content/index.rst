@@ -11,8 +11,7 @@ Snakemake Hackathon
 
 .. prereq::
 
-   - Depends on expected outcome; If needed, please read this material as supercomputing concept refresher: https://coderefinery.github.io/TTT4HPC_resource_management/#
-   If you are interested, also check the rest of the materials from "Tuesdays Tools and Techniques for HPC" (it is quite useful for daily working on clusters): https://scicomp.aalto.fi/training/scip/ttt4hpc-2024/
+   - Depends on expected outcome; If needed, please read this material as supercomputing concept refresher: https://coderefinery.github.io/TTT4HPC_resource_management/# (If you are interested, also check the rest of the materials from "Tuesdays Tools and Techniques for HPC" (it is quite useful for daily working on clusters): https://scicomp.aalto.fi/training/scip/ttt4hpc-2024/)
    - Supercomputer access
 
 
