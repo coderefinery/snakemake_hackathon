@@ -91,7 +91,7 @@ rule copy:
 	    "cp {input} {output}"
 ```
 
-This `Snakefile` defines one input file `hello.txt`, one output file `hello_copy.txt` and a shell command `cp {input} {output}`. The shell command is formatted automatically by Snakemake. The `input` and `output` are substituted using the values provided in the previous section.
+This `Snakefile` defines one input file `hello.txt`, one output file `hello_copy.txt` and a shell command `cp {input} {output}`. The shell command is formatted automatically by Snakemake. On runtime, `{input}` and `{output}` are substituted by the filenames provided.
 
 Before running, copy the content of the `Snakefile` into the file called `Snakefile` (without an extension) and create `hello.txt` file with some content:
 ```bash
