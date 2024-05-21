@@ -48,7 +48,9 @@ As your workflows grow in terms of number of steps, or also the size of dataset,
 
 ```{figure} img/sustainability.jpeg
 :width: 60%
-:alt: Taken from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat V, Forster J, Lee S, Twardziok SO, Kanitz A, Wilm A, Holtgrewe M, Rahmann S, Nahnsen S, Köster J. Sustainable data analysis with Snakemake. F1000Res. 2021 Apr 19;10:33. doi: 10.12688/f1000research.29032.2. PMCID: PMC8114187.
+:alt: Hierarchy of aspects to consider for sustainable data analysis.
+
+Image from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat V, Forster J, Lee S, Twardziok SO, Kanitz A, Wilm A, Holtgrewe M, Rahmann S, Nahnsen S, Köster J. Sustainable data analysis with Snakemake. F1000Res. 2021 Apr 19;10:33. doi: 10.12688/f1000research.29032.2. 
 ```
 
 ## Why Snakemake?
@@ -261,7 +263,7 @@ The result can be visualized using either the `GraphViz` package (which needs to
 snakemake --cores 1 --dag | dot -Tpng > dag.png
 ```
 
-One improvement to this `Snakefile` would be to directly refer to the outputs of the rules by using the rule's name. This approach is more robust, as we can freely change the output names, without breaking the workflow. Remember that you can only refer to the rules that were defined before, so we cannot modify in that way the `all` rule! 
+Another way to link rules in the `Snakefile` would be to directly refer to the outputs of the rules by using the rule's name. This approach is more robust when the execution order of the steps matters, as we can freely adjust output names, without breaking the workflow. Remember that you can only refer to the rules that were defined before, so the `all` rule cannot be modified that way! 
 ```bash
 rule all:
     input:
