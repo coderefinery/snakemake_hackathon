@@ -351,7 +351,7 @@ Now we can see in the terminal output, that Snakemake is running two jobs at a t
 
 ### Error recovery and re-entry
 
-Snakemake offers some error recovery features. Analyzing the above example, what would happen if one of the files that we try to modify is corrupted? Snakemake will automatically stop the execution of the entire workflow, even though three other files can be processed correctly. Although this behaviour may be useful in some cases, if we want to compute as many partial results as we can, we should use the `--keep-going` flag. It makes Snakemake keep going as far into workflow as it possibly can, computing all results that do not relay on the corrupted or failed jobs.
+Snakemake offers error recovery features. Analyzing the above example, what would happen if one of the input files that we try to modify is corrupted, i.e. not readable? Snakemake will automatically stop the execution of the entire workflow, even though three other files can be processed correctly. Although this behaviour may be useful in some cases, sometimes we may want to compute as many results as we can. To enable this, we can use the `--keep-going` flag. It makes Snakemake keep going as far into workflow as it possibly can, computing all results that do not rely on corrupted files or failed jobs.
 ```bash
 snakemake --cores 2 --keep-going
 ```
