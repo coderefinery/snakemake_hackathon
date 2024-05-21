@@ -26,7 +26,7 @@ Snakemake is a powerful workflow management system designed to create reproducib
 
 Imagine having some data processing workflow that takes raw data, converts and filters it, and finally produces some result, for example a plot. Each step of the workflow is done using command line tools and scripts written in different languages. You could run everything manually: step by step, checking each output and passing it to the next script or tool. 
 
-Soon enough, you may start automating your work. The simplest way to automate would be to use bash script (if you are on Linux). Your script may look like this:
+Soon enough, you may start automating your work. The simplest way to automate would be to use bash script (if you use MacOS/Linux). Your script may look like this:
 ```bash
 wget http://example.com/dataset_2024.zip
 unzip dataset_2024.zip
