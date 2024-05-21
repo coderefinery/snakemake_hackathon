@@ -432,7 +432,7 @@ rule count_words:
         "wc -w {input} > {output}"
 
 ```
-Here, we included both text files in the report. After opening it, we can download them.
+By adding the `report()` around our output files, we include both output text files in the report. When opening the report in a web browser, we can now also access the output files and download them.
 
 
 ## Monitoring
