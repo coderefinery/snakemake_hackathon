@@ -105,7 +105,7 @@ snakemake --cores 1
 
 Snakemake executes the `Snakefile` with the one rule in it. The content is copied! Note two things: the `--cores` flag and that we did not specified the `Snakefile`. By default, Snakemake will search for a `Snakefile` in the current directory. We can specify which `Snakefile` to run using the `--snakefile` flag. For example:
 ```bash
-snakemake --cores 1 -s Snakefile_2
+snakemake --cores 1 --snakefile Snakefile_2
 ```
 
 will run the `Snakefile_2`. Thanks to that, now we can also how multiple `Snakefile`s in one directory. The `--cores` flag tells Snakemake how many resources (cores) from our computer Snakemake can use to execute the workflow. It is mandatory flag, so one cannot omit it.
