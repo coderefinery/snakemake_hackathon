@@ -437,7 +437,7 @@ By adding the `report()` around our output files, we include both output text fi
 
 ## Monitoring
 
-Warning: this section may not work for Windows users!
+> Warning: this section may not work for Windows users!
 
 Snakemake offers monitoring feature. In this case, monitoring means have live insights into a workflow execution progress. Monitoring is offer via external tool called `panoptes`. It is a simple web page with an API to which Snakemake connects. It has to be deployed, but the process is easy.
 ```bash
