@@ -56,7 +56,6 @@ As your workflows grow in terms of number of steps, or also the size of dataset,
 - Highly popular tool: 11 new citations per week and over 1,000,000 downloads
 - Available as Python package (pip, conda), but not Python specific!
 - Python-based syntax (easy to read, quick to develop)
-- Possible to extend with embedded Python code, but not necessary 
 - Supports multiple different scripting languages and all command line tools
 - Plenty of useful features for automating the work
 
