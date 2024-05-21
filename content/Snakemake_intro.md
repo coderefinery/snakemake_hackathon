@@ -366,7 +366,7 @@ rule get_data_from_server:
         "curl https://some.unreliable.server/test.txt > {output}"
 ```
 
-Server does not respond with any data, so the `curl` command exists with an error. Snakemake quickly retires the job three times. Retrying can be set globally for all jobs using the `--retires` flag followed by the number of retries. 
+In cases where a server does not respond with any data, the `curl` command exists with an error. Snakemake quickly retries the job three times. Retrying can be set globally for all jobs using the `--retries` flag followed by the number of retries. 
 
 ## Reporting
 
