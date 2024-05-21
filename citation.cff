@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you reuse these materials, please cite it as below."
+authors:
+- name: "CodeRefinery"
+- family-names: "Golos"
+  given-names: "Antoni"
+- family-names: "Wittke"
+  given-names: "Samantha"
+- family-names: "Yetukuri"
+  given-names: "Laxmana"
+title: "Snakemake hackathon"
+version: 1.0.0
+date-released: 2024-05-22
+url: "https://coderefinery.github.io/snakemake_hackathon/"
+license: CC-BY-4.0
+repository-code: "https://github.com/coderefinery/reproducible-research"
