@@ -206,7 +206,7 @@ rule copy:
     script:
         "copy.py"
 ```
-In the Python file, we have access to the `snakemake` object, which allows us to get access to input and output files! We do not need to parse any command line arguments. The access is granted because of the `script` keyword, which works like a wrapper around the script. Similar integrations are available for other languages as well: R, Markdown, Julia, Rust, Bash and Jupyter Notebook. See the current list in the [docs](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#external-scripts)
+In the Python file, we have access to the `snakemake` object, which allows us to get access to the content of the `input` and `output` directives! We do not need to parse any command line arguments. The access is granted by the `script` keyword, which works like a wrapper around the script. Similar integrations are available for other languages as well: R, Markdown, Julia, Rust, Bash and Jupyter Notebook. See the current list in the [Snakemake documentation](https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#external-scripts).
 
 
 ### Dependencies between rules
