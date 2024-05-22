@@ -106,14 +106,9 @@ Check out another [Snakemake profile example from the Tuesdays Tools and Techniq
 
 ##  Cluster specific information
 
-`````{tabs}
-  ````{group-tab} CSC Puhti or LUMI
-Running Snakemake on CSC's Puhti or LUMI: [Slides](https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers).
-  ````
-  ````{group-tab} UPPMAX
-TBD
-  ````
-`````
+### CSC Puhti or LUMI
+
+[Slides on running Snakemake on CSC's Puhti or LUMI](https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers).
 
 
 ```{keypoints}
