@@ -1,8 +1,7 @@
 Snakemake Hackathon
 ====================
 
-.. info::
-   Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ organized on 22.05.24. Licensed under CC-BY-4.0 license.
+Materials for `Snakemake hackathon <https://ssl.eventilla.com/snakemake_hack>`_ organized on 22.05.24. Licensed under CC-BY-4.0 license.
 
 .. image:: csc_geoportti_coderefinery_enccs_naiss_logos_horizontal.png
   :width: 400
