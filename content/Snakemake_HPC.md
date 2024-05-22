@@ -3,7 +3,7 @@
 ```{objectives}
 - Understand the different ways Snakemake can be run on clusters
 - Evaluate which way suits your needs 
-- Make own workflow ready for HPC
+- Get an idea on how to make own workflow ready for the supercomputer
 ```
 
 > Note on versions: These materials assume Snakemake version 8.0 or later. Earlier (before version 8.0) Snakemake versions deal differently with SLURM. Please check the documentation for your version of snakemake. 
