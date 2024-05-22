@@ -64,7 +64,7 @@ Image from Mölder F, Jablonski KP, Letcher B, Hall MB, Tomkins-Tinch CH, Sochat
 
 It is important to remember that Snakemake does not require Python knowledge or limits you to using Python code.  
 
-### {optional} Installation
+### Installation
 
 To install Snakemake on your own computer, we can use Python Package Installer (`pip`). First, ensure you have Python installed on your system.
 
@@ -158,7 +158,7 @@ snakemake --cores 1 hello_copy.txt
 
 Snakemake parses the `hello_copy.txt` argument and detects that the wildcard is equal to `hello`. Then, Snakemake looks for the `hello.txt` file.
 
-### {optional} Python code in Snakefile
+### Python code in Snakefile
 
 Another powerful feature is the possibility to add Python code and function inside of Snakefile. We also have access to Python libraries, by using traditional `import` keyword. For example, the following code searches for all text files in the given directory, and appends their content in the `copy.txt` file.
 ```bash
@@ -351,7 +351,7 @@ snakemake --cores 2 --forceall
 Now we can see in the terminal output, that Snakemake is running two jobs at a time, using two cores. The execution time was around two times faster. Snakemake automatically detected, that some parts of the workflow can be run in parallel, and used the provided resources to parallelize the work. In this case, each file can be processed independently, there is no aggregation or combining the results.
 
 
-### {optional} Error recovery and re-entry
+### Error recovery and re-entry
 
 Snakemake offers error recovery features. Analyzing the above example, what would happen if one of the input files that we try to modify is corrupted, i.e. not readable? Snakemake will automatically stop the execution of the entire workflow, even though three other files can be processed correctly. Although this behaviour may be useful in some cases, sometimes we may want to compute as many results as we can. To enable this, we can use the `--keep-going` flag. It makes Snakemake keep going as far into workflow as it possibly can, computing all results that do not rely on corrupted files or failed jobs.
 ```bash
@@ -370,7 +370,7 @@ rule get_data_from_server:
 
 In cases where a server does not respond with any data, the `curl` command exists with an error. Snakemake quickly retries the job three times. Retrying can be set globally for all jobs using the `--retries` flag followed by the number of retries. 
 
-## {optional} Reporting
+## Reporting
 
 Snakemake generates execution logs with the content that is also printed in the terminal and stores them in the (hidden) `.snakemake` directory located in the directory where the `snakemake` command is executed . After executing a workflow, Snakemake saves metadata about the execution in that directory. To generate a proper report, we use the `--report` flag when executing the `snakemake` command followed by the filename for the report.
 
@@ -437,7 +437,7 @@ rule count_words:
 By adding the `report()` around our output files, we include both output text files in the report. When opening the report in a web browser, we can now also access the output files and download them.
 
 
-## {optional} Monitoring
+## Monitoring
 
 > Warning: this section may not work for Windows users!
 
@@ -500,7 +500,7 @@ Following the [documentation](https://snakemake.readthedocs.io/en/stable/snakefi
 > Workflows that are set up in above structure can be more easily re-used and combined via the [Snakemake module system](https://snakemake.readthedocs.io/en/stable/snakefiles/deployment.html#use-with-modules). Such deployment can even be automated via [Snakedeploy](https://snakedeploy.readthedocs.io/en/latest/). Moreover, by publishing a workflow on Github and following a set of additional rules the workflow will be automatically included in the [Snakemake workflow catalog](https://snakemake.github.io/snakemake-workflow-catalog/), thereby easing discovery and even automating its usage documentation.
 
 
-### {optional} Containerization
+### Containerization
 
 Containers, like Docker or Singularity/Apptainer, provide a lightweight and portable way to package and run applications. They encapsulate an application and its dependencies, ensuring it runs consistently across different environments. Unlike virtual machines, containers share the host system's kernel but isolate the application's processes, filesystem, and resources. This makes containers more efficient in terms of performance and resource usage, allowing for quick startup times and easier scalability. 
 
