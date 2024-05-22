@@ -65,6 +65,8 @@ The downloaded material includes scripts and data to run snakemake pipeline:
 - **snakemake_hq_lumi.sh** for running the example on LUMI
 - **snakemake_hq_puhti.sh** for running the example on Puhti
 
+The process described in the Snakefile is a life science example where raw sequencing data is mapped to reference data (using bwa tool under the rule: `bwa_map`). The resulting data (`.bam` files) is sorted (by `samtool` in the rule, `samtools_sort`) and indexed (by `samtool` in the rule, `samtools_index) before variant calling. Variants are called (by `bcftool` untility tools in the rule: `bcftools_call) and finally plotted (in the rule: `plot_quals). The raw reads are random tiny `fastq` files and may not have biological meaning.
+
 To run the example on UPPMAX and others, please use the Puhti batch job script.
 
 The computing environment for running the job is provided as container image (`image/tutorial.sif`), you can check the container definition file `image/tutorial.def` and the conda environment `image/tutorial.yaml` file for the contents of the image.
