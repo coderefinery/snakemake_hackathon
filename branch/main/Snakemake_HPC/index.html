@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snakemake on the supercomputer &mdash; Snakemake Hackathon  documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_lesson.css?v=0c089442" />
+      <link rel="stylesheet" type="text/css" href="../_static/term_role_formatting.css?v=4194e21c" />
+      <link rel="stylesheet" type="text/css" href="../_static/sphinx_rtd_theme_ext_color_contrast.css?v=8e8ea19f" />
+      <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=187304be"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+        <script src="../_static/minipres.js?v=a0d29692"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex/" />
+    <link rel="search" title="Search" href="../search/" />
+    <link rel="next" title="Hackathon" href="../Hackathon/" />
+    <link rel="prev" title="Snakemake introduction" href="../Snakemake_intro/" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../" class="icon icon-home">
+            Snakemake Hackathon
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search/" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Materials</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Snakemake_intro/">Snakemake introduction</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Snakemake on the supercomputer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#cluster-snakemake-installation">Cluster Snakemake installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ways-of-running-snakemake-on-clusters">Ways of running Snakemake on clusters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#within-one-slurm-job">Within one SLURM job</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#interactive">Interactive</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#slurm-integration-with-the-snakemake-slurm-executor-plugin">Slurm integration with the Snakemake SLURM executor plugin</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#snakemake-at-scale-using-hyperqueue">Snakemake at scale using Hyperqueue</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#config-profile-files">Config/Profile files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#good-practices">Good practices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#cluster-specific-information">Cluster specific information</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csc-puhti-or-lumi">CSC Puhti or LUMI</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Hackathon/">Hackathon</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../">Snakemake Hackathon</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Snakemake on the supercomputer</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/snakemake_hackathon/blob/main/content/Snakemake_HPC.md" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="snakemake-on-the-supercomputer">
+<h1>Snakemake on the supercomputer<a class="headerlink" href="#snakemake-on-the-supercomputer" title="Link to this heading"></a></h1>
+<div class="admonition-objectives objectives admonition" id="objectives-0">
+<p class="admonition-title">Objectives</p>
+<ul class="simple">
+<li><p>Understand the different ways Snakemake can be run on clusters</p></li>
+<li><p>Evaluate which way suits your needs</p></li>
+<li><p>Get an idea on how to make own workflow ready for the supercomputer</p></li>
+</ul>
+</div>
+<blockquote>
+<div><p>Note on versions: These materials assume Snakemake version 8.0 or later. Earlier (before version 8.0) Snakemake versions deal differently with SLURM. Please check the documentation for your version of snakemake.</p>
+</div></blockquote>
+<section id="cluster-snakemake-installation">
+<h2>Cluster Snakemake installation<a class="headerlink" href="#cluster-snakemake-installation" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Preinstalled and made available via module: <code class="docutils literal notranslate"><span class="pre">module</span> <span class="pre">load</span> <span class="pre">snakemake/version</span></code></p></li>
+<li><p>Own Conda/Pip based installation</p></li>
+<li><p>Own container based installation</p></li>
+</ol>
+<p>Always check first if your cluster has the tool available as <strong>module</strong>, then you do not have to worry about installation yourself.
+If you need additional packages, you can usually add own packages by <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code> for your own user or project. It may also be possible to load multiple modules at the same time (feasibility depends on the modules). If that for some reason does not work, you can create your own installation with Conda or Pip, or by making use of containers. <strong>Check your clusters documentation for information on how to do these.</strong>
+Ask your friendly cluster support for help or advice, if needed.</p>
+</section>
+<section id="ways-of-running-snakemake-on-clusters">
+<h2>Ways of running Snakemake on clusters<a class="headerlink" href="#ways-of-running-snakemake-on-clusters" title="Link to this heading"></a></h2>
+<section id="within-one-slurm-job">
+<h3>Within one SLURM job<a class="headerlink" href="#within-one-slurm-job" title="Link to this heading"></a></h3>
+<section id="interactive">
+<h4>Interactive<a class="headerlink" href="#interactive" title="Link to this heading"></a></h4>
+<p>You can run snakemake the same way you would run it on your own computer also on cluster within one interactive or normal batch job (one resource allocation for the whole workflow (= all rules)). The interactive session is is a useful first step to try it out, but does not scale well (only to the resource limits of one interactive job).</p>
+<p>In an interactive job (using the interactive partition; some clusters support starting an interactive session with the <code class="docutils literal notranslate"><span class="pre">sinteractive</span></code> command), you would load the snakemake module, and then run <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">--cores</span> <span class="pre">1</span></code> (or more, if you reserved more) as you would on your local machine.</p>
+<p>You can run snakemake in the background for example with <a class="reference external" href="https://linux.die.net/man/1/screen"><code class="docutils literal notranslate"><span class="pre">screen</span></code></a>.</p>
+<section id="sbatch-script">
+<h5>Sbatch script<a class="headerlink" href="#sbatch-script" title="Link to this heading"></a></h5>
+<p>Another way to run snakemake in <strong>one job</strong> is to use an sbatch script for job submission to run the workflow non-interactive.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=myTest</span>
+<span class="c1">#SBATCH --account=project_xxxxx</span>
+<span class="c1">#SBATCH --time=00:10:00</span>
+<span class="c1">#SBATCH --mem-per-cpu=2G</span>
+<span class="c1">#SBATCH --partition=test</span>
+<span class="c1">#SBATCH --cpus-per-task=4</span>
+
+<span class="n">module</span> <span class="n">load</span> <span class="n">snakemake</span><span class="o">/</span><span class="n">version</span>
+<span class="n">snakemake</span> <span class="o">--</span><span class="n">cores</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>Note how 4 CPUs are reserved ( <code class="docutils literal notranslate"><span class="pre">#SBATCH</span> <span class="pre">--cpus-per-task=4</span></code>) and made available to the workflow (<code class="docutils literal notranslate"><span class="pre">--cores</span> <span class="pre">4</span></code>). Within the Snakefile resource distribution and parallelization can be controlled using <code class="docutils literal notranslate"><span class="pre">threads:X</span></code> directive, see the <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#threads">Snakemake documentation on threads</a>.</p>
+</section>
+</section>
+<section id="slurm-integration-with-the-snakemake-slurm-executor-plugin">
+<h4>Slurm integration with the <a class="reference external" href="https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html">Snakemake SLURM executor plugin</a><a class="headerlink" href="#slurm-integration-with-the-snakemake-slurm-executor-plugin" title="Link to this heading"></a></h4>
+<p>With the plugin you can define SLURM batch job resources for your snakemake workflow instead of writing an sbatch file.</p>
+<p>Snakemake provides a <a class="reference external" href="https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html">Snakemake SLURM executor</a> as plugin, which can be used to let Snakemake run workflows on clusters. For this, you would start an interactive session, from which you could call :</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">module</span> <span class="n">load</span> <span class="n">snakemake</span><span class="o">/</span><span class="n">version</span>
+
+<span class="n">snakemake</span> <span class="o">--</span><span class="n">jobs</span> <span class="mi">1</span> <span class="o">--</span><span class="n">executor</span> <span class="n">slurm</span> <span class="o">--</span><span class="n">default</span><span class="o">-</span><span class="n">resources</span> <span class="n">slurm_account</span><span class="o">=</span><span class="n">project_xxx</span> <span class="n">slurm_partition</span><span class="o">=</span><span class="n">test</span> <span class="n">runtime</span><span class="o">=</span><span class="mi">10</span> <span class="n">mem_mb_per_cpu</span><span class="o">=</span><span class="mi">2000</span> <span class="n">cpus_per_task</span><span class="o">=</span><span class="mi">4</span>
+</pre></div>
+</div>
+<p>This command would submit <strong>one new job</strong> (defined by <code class="docutils literal notranslate"><span class="pre">--jobs</span> <span class="pre">1</span></code>) to SLURM for running the whole workflow in that job, similar to the sbatch script above. Instead of defining <code class="docutils literal notranslate"><span class="pre">cpus_per_task</span></code> for the whole workflow, one could also define <code class="docutils literal notranslate"><span class="pre">threads:X</span></code> for each rule.</p>
+<p>Other SLURM resource specifications can be found from the table in the <a class="reference external" href="https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/slurm.html#advanced-resource-specifications">SLURM executor plugin documentation</a>.</p>
+<p>The SLURM integration also provides the possibility to start multiple SLURM jobs (specified by setting <code class="docutils literal notranslate"><span class="pre">--jobs</span></code> to &gt; 1) for you; for example one for each step. However, with this option you would have to wait in queue for every single step to be executed which generates a lot of overhead, especially for short job steps. Using the Snakemake SLURM integration this way should therefore be avoided in cases where single steps are short. A better solution to scale up your Snakemake workflow (also to multiple nodes) is to use Hyperqueue instead:</p>
+</section>
+</section>
+<section id="snakemake-at-scale-using-hyperqueue">
+<h3>Snakemake at scale using Hyperqueue<a class="headerlink" href="#snakemake-at-scale-using-hyperqueue" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://it4innovations.github.io/hyperqueue/stable/">HyperQueue (HQ)</a> is an efficient sub-node task scheduler. Instead of submitting each of your computational tasks as separate Slurm jobs or job steps, you can allocate a large resource block and then use HyperQueue to submit your tasks to this allocation, even when running your workflow on multiple nodes.
+The <a class="reference external" href="https://snakemake.github.io/snakemake-plugin-catalog/plugins/executor/cluster-generic.html">generic cluster executor</a> plugin can be used to configure hyperqueue runs, e.g. <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">--executor</span> <span class="pre">cluster-generic</span> <span class="pre">--cluster-generic-submit-cmd</span> <span class="pre">&quot;hq</span> <span class="pre">submit</span> <span class="pre">...&quot;</span> </code>.</p>
+<ul class="simple">
+<li><p>Useful for high-throughput jobs (many steps and rules on many files, needing a lot of resources)</p></li>
+<li><p>Extra benefit: Multiple nodes can be used under the same job allocation</p></li>
+</ul>
+<p>For more information, please check out the provided Hyperqueue example.</p>
+</section>
+</section>
+<section id="config-profile-files">
+<h2>Config/Profile files<a class="headerlink" href="#config-profile-files" title="Link to this heading"></a></h2>
+<p>Snakemake takes many parameters as command line arguments/flags. However, when working with clusters these can become quite many very fast. Many of which also do not change very often, e.g. <code class="docutils literal notranslate"><span class="pre">slurm-account</span></code>. One way to make the command line call shorter, is to define some of the parameters in <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/executing/cli.html#profiles"><strong>profiles</strong></a>. These can be global or workflow specific.</p>
+<p>A profile is written in <code class="docutils literal notranslate"><span class="pre">YAML</span> <span class="pre">format</span></code> and usually called <code class="docutils literal notranslate"><span class="pre">config.yml</span></code> and can be provided to Snakemake using the <code class="docutils literal notranslate"><span class="pre">--profile</span></code> flag (Note to only provide the path where Snakemake should look for the profile file, e.g. <code class="docutils literal notranslate"><span class="pre">profiles/slurm/</span></code> (without the profile filename)). An option defined by <code class="docutils literal notranslate"><span class="pre">--someoption</span></code> in the Snakemake command line call becomes <code class="docutils literal notranslate"><span class="pre">someoption:</span> </code> in the profile. Example profile:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jobs</span><span class="p">:</span> <span class="mi">1</span>
+<span class="n">default</span><span class="o">-</span><span class="n">resources</span><span class="p">:</span> 
+  <span class="n">slurm_account</span><span class="p">:</span> <span class="n">project_xxx</span>
+</pre></div>
+</div>
+<p>Check out another <a class="reference external" href="https://coderefinery.github.io/TTT4HPC_parallel_workflows/parallelization/parallelize_using_workflow_manager/#create-and-run-snakemake-workflow">Snakemake profile example from the Tuesdays Tools and Techniques course</a>.</p>
+</section>
+<section id="good-practices">
+<h2>Good practices<a class="headerlink" href="#good-practices" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>General:</p>
+<ul>
+<li><p>As with all code, it is advised to also keep your Snakefiles under <strong>version control</strong>, e.g. using <code class="docutils literal notranslate"><span class="pre">git</span></code></p></li>
+<li><p>Consider <strong>containerizing</strong> your whole workflow for portability</p></li>
+</ul>
+</li>
+<li><p>When running Snakemake on clusters:</p>
+<ul>
+<li><p>Try to <strong>avoid unnecessary read and write operations</strong>, check if use of fast local disk is possible</p></li>
+<li><p>Consider summarizing small jobs/job steps into one job  when you want to use the SLURM plugin to limit SLURM accounting overhead, e.g. by <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/executing/grouping.html">job grouping</a></p></li>
+<li><p>Try to avoid creating a lot of files, especially in the same folder, <a class="reference external" href="https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#protected-and-temporary-files">Snakemake can remove temporary files after the job is finnished</a>.</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="cluster-specific-information">
+<h2>Cluster specific information<a class="headerlink" href="#cluster-specific-information" title="Link to this heading"></a></h2>
+<section id="csc-puhti-or-lumi">
+<h3>CSC Puhti or LUMI<a class="headerlink" href="#csc-puhti-or-lumi" title="Link to this heading"></a></h3>
+<p><a class="reference external" href="https://a3s.fi/CSC_training/snakemake_hackathon.html#/snakemake-hackathon-in-csc-supercomputers">Slides on running Snakemake on CSC’s Puhti or LUMI</a>.</p>
+<div class="admonition-keypoints keypoints admonition" id="keypoints-0">
+<p class="admonition-title">Keypoints</p>
+<ul class="simple">
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">snakemake</span> <span class="pre">module</span></code> if your cluster provides one; add own packages or modules where necessary</p></li>
+<li><p>If that fails, consider creating your own environment; follow cluster specific instructions</p></li>
+<li><p>Use interactive jobs to test and setup your Snakemake workflow</p></li>
+<li><p>Use normal batch jobs for running your tested workflows via sbatch script or using the Snakemake SLURM executor (<code class="docutils literal notranslate"><span class="pre">--jobs</span> <span class="pre">=</span> <span class="pre">1</span></code>)</p></li>
+<li><p>Use Hyperqueue to scale your workflow on the cluster, especially when you need multiple nodes</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../Snakemake_intro/" class="btn btn-neutral float-left" title="Snakemake introduction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../Hackathon/" class="btn btn-neutral float-right" title="Hackathon" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LESSON NAME documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_lesson.css" />
+      <link rel="stylesheet" type="text/css" href="_static/term_role_formatting.css" />
+      <link rel="stylesheet" type="text/css" href="_static/sphinx_rtd_theme_ext_color_contrast.css" />
+      <link rel="stylesheet" type="text/css" href="_static/tabs.css" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/sphinx_highlight.js"></script>
+        <script src="_static/clipboard.min.js"></script>
+        <script src="_static/copybutton.js"></script>
+        <script src="_static/minipres.js"></script>
+        <script>let toggleHintShow = 'Click to show';</script>
+        <script>let toggleHintHide = 'Click to hide';</script>
+        <script>let toggleOpenOnPrint = 'true';</script>
+        <script src="_static/togglebutton.js"></script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+        <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            LESSON NAME
+          </a>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Theory</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="#document-HPC_refresh">HPC refresher</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#document-Snakemake_intro">Snakemake introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#document-Snakemake_HPC">Running Snakemake worklfow  on CSC supercomputers</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Reference</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="#document-quick-reference">Quick Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="#document-guide">Instructor’s guide</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">LESSON NAME</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">LESSON NAME  documentation</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/coderefinery/content/blob/main/content/index" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="snakemake-hackathon">
+<h1>Snakemake Hackathon<a class="headerlink" href="#snakemake-hackathon" title="Link to this heading"></a></h1>
+<p>Intro</p>
+<div class="admonition-prerequisites prerequisites admonition" id="prerequisites-0">
+<p class="admonition-title">Prerequisites</p>
+<p>prerequisites</p>
+</div>
+<div class="toctree-wrapper compound">
+<span id="document-HPC_refresh"></span><section id="hpc-refresher">
+<h2>HPC refresher<a class="headerlink" href="#hpc-refresher" title="Link to this heading"></a></h2>
+<p>Recap of the most important concepts of HPC that need to be understood to run Snakemake on clusters.</p>
+<section id="login-vs-compute-node">
+<h3>Login vs compute node<a class="headerlink" href="#login-vs-compute-node" title="Link to this heading"></a></h3>
+</section>
+<section id="resource-estimation-and-requests">
+<h3>Resource estimation and requests<a class="headerlink" href="#resource-estimation-and-requests" title="Link to this heading"></a></h3>
+</section>
+<section id="modules">
+<h3>Modules<a class="headerlink" href="#modules" title="Link to this heading"></a></h3>
+<section id="premade">
+<h4>Premade<a class="headerlink" href="#premade" title="Link to this heading"></a></h4>
+</section>
+<section id="own-modules">
+<h4>Own modules<a class="headerlink" href="#own-modules" title="Link to this heading"></a></h4>
+</section>
+</section>
+<section id="many-small-jobs">
+<h3>Many small jobs<a class="headerlink" href="#many-small-jobs" title="Link to this heading"></a></h3>
+</section>
+<section id="heavy-i-o">
+<h3>Heavy I/O<a class="headerlink" href="#heavy-i-o" title="Link to this heading"></a></h3>
+</section>
+<section id="id1">
+<h3>..-<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+</section>
+</section>
+<span id="document-Snakemake_intro"></span><section id="snakemake-introduction">
+<h2>Snakemake introduction<a class="headerlink" href="#snakemake-introduction" title="Link to this heading"></a></h2>
+<section id="why-workflow-tools">
+<h3>Why workflow tools?<a class="headerlink" href="#why-workflow-tools" title="Link to this heading"></a></h3>
+<p>Example usecase from GUI -&gt; multiple scripts run manually -&gt; bash script to run all</p>
+<blockquote>
+<div><p>Issues with bashscripts: running only parts (commenting/uncommenting), running only for some files</p>
+</div></blockquote>
+</section>
+<section id="workflow-tools">
+<h3>Workflow tools<a class="headerlink" href="#workflow-tools" title="Link to this heading"></a></h3>
+<p>reproducible description of workflow, “smart”</p>
+</section>
+<section id="snakemake">
+<h3>Snakemake<a class="headerlink" href="#snakemake" title="Link to this heading"></a></h3>
+<p>Why snakemake over other tools?</p>
+<section id="snakefile">
+<h4>Snakefile<a class="headerlink" href="#snakefile" title="Link to this heading"></a></h4>
+</section>
+<section id="rules">
+<h4>Rules<a class="headerlink" href="#rules" title="Link to this heading"></a></h4>
+</section>
+<section id="dependencies-of-steps">
+<h4>Dependencies of steps<a class="headerlink" href="#dependencies-of-steps" title="Link to this heading"></a></h4>
+</section>
+<section id="wildcards">
+<h4>Wildcards<a class="headerlink" href="#wildcards" title="Link to this heading"></a></h4>
+</section>
+<section id="python-code-in-snakefiles">
+<h4>Python code in Snakefiles<a class="headerlink" href="#python-code-in-snakefiles" title="Link to this heading"></a></h4>
+</section>
+<section id="parallelism">
+<h4>Parallelism<a class="headerlink" href="#parallelism" title="Link to this heading"></a></h4>
+</section>
+<section id="portability">
+<h4>Portability<a class="headerlink" href="#portability" title="Link to this heading"></a></h4>
+</section>
+</section>
+</section>
+<span id="document-Snakemake_HPC"></span><section id="running-snakemake-worklfow-on-csc-supercomputers">
+<h2>Running Snakemake worklfow  on CSC supercomputers<a class="headerlink" href="#running-snakemake-worklfow-on-csc-supercomputers" title="Link to this heading"></a></h2>
+<p>Snakemake workflow is one of the popular scientific workflows in the bioinformatics community. The workflow manager enables scalable and reproducible scientific pipelines by chaining a series of rules in a fully-specified software environment. Snakemake software is available as a module in Puhti supercomputing environment.</p>
+<section id="use-containers-as-runtime-environment-for-portable-workflows">
+<h3>Use containers as runtime environment for portable workflows<a class="headerlink" href="#use-containers-as-runtime-environment-for-portable-workflows" title="Link to this heading"></a></h3>
+<p>One can use Singularity/Apptainer container as an alternative to native or Tykky container-based installations for better portability and reproducibility.  If you don’t have a ready-made container image for your needs, you can build a Singularity/Apptainer image on Puhti using <strong>–fakeroot</strong> option.</p>
+<p>For the purpose of this tutorial a pre-built container image which has all the software stack needed is provided to run snakemake workflow at scale.</p>
+</section>
+<section id="working-with-modules-use-hyperqueue-executor-for-high-throughput-workflows">
+<h3>Working with modules: Use HyperQueue executor for high-throughput workflows<a class="headerlink" href="#working-with-modules-use-hyperqueue-executor-for-high-throughput-workflows" title="Link to this heading"></a></h3>
+<p>If a workflow manager is using <code class="docutils literal notranslate"><span class="pre">sbatch</span></code> for each process execution (i.e., a rule), and you have many short processes, it’s advisable to switch to HyperQueue to improve throughput and decrease load on the system batch scheduler.</p>
+<p>You can load HyperQueue and Snakemake modules on Puhti as below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>load<span class="w"> </span>hyperqueue/0.16.0
+module<span class="w"> </span>load<span class="w"> </span>snakemake/8.4.6
+</pre></div>
+</div>
+<p>‼️ In case you are planning to use Snakemake workflows on LUMI supercomputer, you can use module installations, done by CSC staff on LUMI. You can load HyperQueue and Snakemake modules as below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>module<span class="w"> </span>use<span class="w"> </span>/appl/local/csc/modulefiles/
+module<span class="w"> </span>load<span class="w"> </span>hyperqueue/0.18.0
+module<span class="w"> </span>load<span class="w"> </span>snakemake/8.4.6
+</pre></div>
+</div>
+<p>One can use HyperQueue executor settings depending on the Snakemake version as below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># snakemake version 7.xx.x</span>
+snakemake<span class="w"> </span>--cluster<span class="w"> </span><span class="s2">&quot;hq submit  ...&quot;</span><span class="w">  </span>
+<span class="c1"># snakemake version 8.x.x.x</span>
+snakemake<span class="w"> </span>--executor<span class="w"> </span>cluster-generic<span class="w"> </span>--cluster-generic-submit-cmd<span class="w"> </span><span class="s2">&quot;hq submit ...&quot;</span><span class="w">  </span>
+</pre></div>
+</div>
+</section>
+<section id="snakemake-workflow-execution-on-hpc-cluster">
+<h3>Snakemake workflow execution on HPC cluster<a class="headerlink" href="#snakemake-workflow-execution-on-hpc-cluster" title="Link to this heading"></a></h3>
+<p>Create and enter a suitable scratch directory on Puhti (replace <project> with your CSC project, e.g. project_2001234):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>/scratch/&lt;project&gt;/<span class="nv">$USER</span>/snakemake-ht
+<span class="nb">cd</span><span class="w"> </span>/scratch/&lt;project&gt;/<span class="nv">$USER</span>/snakemake-ht
+</pre></div>
+</div>
+<p>Download tutorial materials (scripts and data), which have been adapted from the <a class="reference external" href="https://snakemake.readthedocs.io/en/v6.6.1/executor_tutorial/google_lifesciences.html">official Snakemake documentation</a>, from CSC Allas object storage as below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wget<span class="w"> </span>https://a3s.fi/snakemake_scale/snakemake_scaling.tar.gz
+tar<span class="w"> </span>-xavf<span class="w"> </span>snakemake_scaling.tar.gz
+</pre></div>
+</div>
+<p>The downloaded material includes scripts and data to run snakemake pipeline. You can use <code class="docutils literal notranslate"><span class="pre">snakemake_hq_puhti.sh</span></code> whose content is posted below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
+<span class="c1">#SBATCH --job-name=snakemake</span>
+<span class="c1">#SBATCH --account=&lt;project&gt;  # replace &lt;project&gt; with your CSC project, e.g. project_2001234</span>
+<span class="c1">#SBATCH --partition=small</span>
+<span class="c1">#SBATCH --time=00:10:00</span>
+<span class="c1">#SBATCH --nodes=1</span>
+<span class="c1">#SBATCH --ntasks-per-node=1</span>
+<span class="c1">#SBATCH --cpus-per-task=40</span>
+<span class="c1">#SBATCH --mem-per-cpu=2G</span>
+
+module<span class="w"> </span>load<span class="w"> </span>hyperqueue/0.16.0
+module<span class="w"> </span>load<span class="w"> </span>snakemake/8.4.6
+
+<span class="c1"># Specify a location for the HyperQueue server</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">HQ_SERVER_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">PWD</span><span class="si">}</span>/hq-server-<span class="si">${</span><span class="nv">SLURM_JOB_ID</span><span class="si">}</span>
+mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">HQ_SERVER_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="w"> </span>
+<span class="c1"># Start the server in the background (&amp;) and wait until it has started</span>
+hq<span class="w"> </span>server<span class="w"> </span>start<span class="w"> </span><span class="p">&amp;</span>
+<span class="k">until</span><span class="w"> </span>hq<span class="w"> </span>job<span class="w"> </span>list<span class="w"> </span><span class="p">&amp;</span>&gt;/dev/null<span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">do</span><span class="w"> </span>sleep<span class="w"> </span><span class="m">1</span><span class="w"> </span><span class="p">;</span><span class="w"> </span><span class="k">done</span>
+<span class="w"> </span>
+<span class="c1"># Start the workers in the background and wait for them to start</span>
+srun<span class="w"> </span>--exact<span class="w"> </span>--cpu-bind<span class="o">=</span>none<span class="w"> </span>--mpi<span class="o">=</span>none<span class="w"> </span>hq<span class="w"> </span>worker<span class="w"> </span>start<span class="w"> </span>--cpus<span class="o">=</span><span class="si">${</span><span class="nv">SLURM_CPUS_PER_TASK</span><span class="si">}</span><span class="w"> </span><span class="p">&amp;</span>
+
+hq<span class="w"> </span>worker<span class="w"> </span><span class="nb">wait</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">SLURM_NTASKS</span><span class="si">}</span><span class="s2">&quot;</span>
+
+snakemake<span class="w"> </span>-s<span class="w"> </span>Snakefile<span class="w"> </span>--jobs<span class="w"> </span><span class="m">1</span><span class="w"> </span>--use-singularity<span class="w"> </span>--executor<span class="w"> </span>cluster-generic<span class="w"> </span>--cluster-generic-submit-cmd<span class="w"> </span><span class="s2">&quot;hq submit --cpus 5&quot;</span>
+
+<span class="c1"># for snakemake versions 7.x.xx, use command: snakemake -s Snakefile --jobs 1 --use-singularity --cluster &quot;hq submit --cpus 2&quot;</span>
+
+<span class="c1"># Wait for all jobs to finish, then shut down the workers and server</span>
+hq<span class="w"> </span>job<span class="w"> </span><span class="nb">wait</span><span class="w"> </span>all
+hq<span class="w"> </span>worker<span class="w"> </span>stop<span class="w"> </span>all
+hq<span class="w"> </span>server<span class="w"> </span>stop
+</pre></div>
+</div>
+<section id="how-do-you-parallelise-snakemake-workflow-jobs">
+<h4>How do you parallelise snakemake workflow jobs?<a class="headerlink" href="#how-do-you-parallelise-snakemake-workflow-jobs" title="Link to this heading"></a></h4>
+<p>The default script provided above is not optimised to run in high-throughput way as snakemake workflow manager just submits one job at a time to hyperqueue scheduler. You can parallelise workflow tasks (i.e., rules in snakemake) by submitting more jobs from <em>snakemake</em> command as below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-s<span class="w"> </span>Snakefile<span class="w"> </span>--jobs<span class="w"> </span><span class="m">8</span><span class="w"> </span>--use-singularity<span class="w"> </span>--executor<span class="w"> </span>cluster-generic<span class="w"> </span>--cluster-generic-submit-cmd<span class="w"> </span><span class="s2">&quot;hq submit --cpus 5&quot;</span>
+</pre></div>
+</div>
+<p>You can correct above modification in the batch script (and use your own project number in sbatch directives) before submitting the Snakemake workflow job to the HPC cluster as below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sbatch</span> <span class="n">snakemake_hq_puhti</span><span class="o">.</span><span class="n">sh</span>
+
+</pre></div>
+</div>
+<p>One can also use more than one node to achieve even more high-throughput as HyperQueue can make use of multi-node resource allocations.</p>
+<p>💬 Please note that just by increasing the number jobs will not alone automatically run all those jobs. <em>Jobs</em> parameter from <em>snakemake</em> is just a maximum limit for concurrent jobs. Jobs will be eventually run when resources are available. In our case we submitted 8 parallel jobs, each taking 5 CPUs as we reserved 40 CPUs in batch script. In practice it is a good idea to dedicate few CPUs for workflow manager itself.</p>
+</section>
+<section id="follow-the-progress-of-jobs">
+<h4>Follow the progress of jobs<a class="headerlink" href="#follow-the-progress-of-jobs" title="Link to this heading"></a></h4>
+<p>You can already check the progress of your job by simply observing the current folder where you can see lot of new task-specific folders are being created. However, there are formal ways to check the progress of your jobs as shown below:</p>
+<ol class="arabic simple">
+<li><p>Monitor the status of submitted job</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>squeue -j &lt;slurmjobid&gt;
+# or
+squeue --me
+# or
+squeue -u $USER
+
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Monitor the progress of the individual sub-tasks using HyperQueue sub-commands</p></li>
+</ol>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>module load hyperqueue
+export HQ_SERVER_DIR=$PWD/hq-server-&lt;slurmjobid&gt;
+hq worker list   
+hq job list
+hq job info &lt;hqjobid&gt;
+hq job progress &lt;hqjobid&gt;
+hq task list &lt;hqjobid&gt;
+hq task info &lt;hqjobid&gt; &lt;hqtaskid&gt;
+
+</pre></div>
+</div>
+</section>
+</section>
+<section id="managing-file-i-o">
+<h3>Managing file I/O<a class="headerlink" href="#managing-file-i-o" title="Link to this heading"></a></h3>
+<p>HyperQueue creates task-specific folders (i.e., job-<code class="docutils literal notranslate"><span class="pre">&lt;n&gt;</span></code>) in the same directory from where you have submitted batch script. These are sometimes useful for debugging. However if your code is working fine, the creation of such large number folders may be annoying besides causing some overhead to parallel file systems like Lustre. You can prevent creating such task-specific folders by setting <code class="docutils literal notranslate"><span class="pre">stdout</span></code> and <code class="docutils literal notranslate"><span class="pre">stderr</span></code> flags to <code class="docutils literal notranslate"><span class="pre">none</span></code> as shown below:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>snakemake<span class="w"> </span>-s<span class="w"> </span>Snakefile<span class="w"> </span>-j<span class="w"> </span><span class="m">24</span><span class="w"> </span>--use-singularity<span class="w"> </span>--executor<span class="w"> </span>cluster-generic<span class="w"> </span>--cluster-generic-submit-cmd<span class="w"> </span><span class="s2">&quot;hq submit --stdout=none --stderr=none --cpus 5 &quot;</span>
+</pre></div>
+</div>
+</section>
+<section id="more-information">
+<h3>More Information<a class="headerlink" href="#more-information" title="Link to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.csc.fi/support/tutorials/snakemake-puhti/">CSC documentation on Snakemake</a></p></li>
+<li><p><a class="reference external" href="https://snakemake.readthedocs.io/en/stable/">Snakemake official documentation</a></p></li>
+</ul>
+<p>…</p>
+</section>
+</section>
+</div>
+<div class="toctree-wrapper compound">
+<span id="document-quick-reference"></span><section id="quick-reference">
+<h2>Quick Reference<a class="headerlink" href="#quick-reference" title="Link to this heading"></a></h2>
+</section>
+<span id="document-guide"></span><section id="instructor-s-guide">
+<h2>Instructor’s guide<a class="headerlink" href="#instructor-s-guide" title="Link to this heading"></a></h2>
+<section id="why-we-teach-this-lesson">
+<h3>Why we teach this lesson<a class="headerlink" href="#why-we-teach-this-lesson" title="Link to this heading"></a></h3>
+</section>
+<section id="intended-learning-outcomes">
+<h3>Intended learning outcomes<a class="headerlink" href="#intended-learning-outcomes" title="Link to this heading"></a></h3>
+</section>
+<section id="timing">
+<h3>Timing<a class="headerlink" href="#timing" title="Link to this heading"></a></h3>
+</section>
+<section id="preparing-exercises">
+<h3>Preparing exercises<a class="headerlink" href="#preparing-exercises" title="Link to this heading"></a></h3>
+<p>e.g. what to do the day before to set up common repositories.</p>
+</section>
+<section id="other-practical-aspects">
+<h3>Other practical aspects<a class="headerlink" href="#other-practical-aspects" title="Link to this heading"></a></h3>
+</section>
+<section id="interesting-questions-you-might-get">
+<h3>Interesting questions you might get<a class="headerlink" href="#interesting-questions-you-might-get" title="Link to this heading"></a></h3>
+</section>
+<section id="typical-pitfalls">
+<h3>Typical pitfalls<a class="headerlink" href="#typical-pitfalls" title="Link to this heading"></a></h3>
+</section>
+</section>
+</div>
+<section id="who-is-the-course-for">
+<span id="learner-personas"></span><h2>Who is the course for?<a class="headerlink" href="#who-is-the-course-for" title="Link to this heading"></a></h2>
+</section>
+<section id="about-the-course">
+<h2>About the course<a class="headerlink" href="#about-the-course" title="Link to this heading"></a></h2>
+</section>
+<section id="see-also">
+<h2>See also<a class="headerlink" href="#see-also" title="Link to this heading"></a></h2>
+</section>
+<section id="credits">
+<h2>Credits<a class="headerlink" href="#credits" title="Link to this heading"></a></h2>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2020, The contributors.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
