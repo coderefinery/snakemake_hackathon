@@ -507,6 +507,8 @@ Containers, like Docker or Singularity/Apptainer, provide a lightweight and port
 To use containers with Snakemake, we add the `container` keyword inside a rule, linking either to a local or external container image:
 
 ```bash
+shell.executable("/bin/sh")
+
 rule copy:
     container:
         "docker://alpine:3.14"
@@ -517,6 +519,8 @@ rule copy:
     shell:
 	    "cp {input} {output}"
 ```
+
+Note that in this case we also have to define the shell executable available within the alpine container with `shell.executable("/bin/sh")`. 
 
 To execute that Snakefile, we have to add the `--software-deployment-method` flag:
 ```bash
